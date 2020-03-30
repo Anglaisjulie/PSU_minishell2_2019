@@ -1,0 +1,12 @@
+image:  epitechcontent/epitest-docker
+
+stages:
+    - build
+
+delivery:
+    stage: build
+    script:
+        - make fclean
+        - make re
+        - make
+
