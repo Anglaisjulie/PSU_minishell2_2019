@@ -61,7 +61,6 @@ int command_malloc(shell_t *shell, char *command)
 int malloc_command(shell_t *shell, char *command)
 {
     shell->command_shell = NULL;
-
     if (nb_word(shell, command) == 84)
         return (84);
     if (command_malloc(shell, command) == -1)
