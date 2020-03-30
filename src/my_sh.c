@@ -33,6 +33,8 @@ int my_sh(shell_t *shell)
 
 int option_shell(shell_t *shell)
 {
+    int a = 0;
+
     if (my_strcmp(shell->command_shell[0], "env") == 0) {
         if (print_env(shell) == -1)
             return (-1);
@@ -42,8 +44,11 @@ int option_shell(shell_t *shell)
         my_printf("exit\n");
         exit(0);
     }
-    if (shell_option(shell) == -1)
+    a = shell_option(shell);
+    if (a == -1)
         return (-1);
+    else if (a == 1)
+        return (1);
     return (0);
 }
 

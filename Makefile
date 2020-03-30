@@ -30,7 +30,7 @@ NAME =	mysh
 
 CFLAGS =	-W -Wall -L./lib/ -lmy -I./include/
 CFLAGS +=	-fdiagnostics-color
-CFLAGS +=	-lcsfml-window -lcsfml-graphics -lcsfml-audio -lcsfml-system
+CFLAGS +=	-g3
 
 
 all:	$(NAME) clean
