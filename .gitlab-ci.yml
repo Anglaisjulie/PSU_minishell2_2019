@@ -11,12 +11,8 @@ job:build:
         - make re
         - make
 
-job:push:
-  stage: push
-  script:
-    - make fclean
-    - git remote
-    - git remote add epitech git@git.epitech.eu:/julie.anglais@epitech.eu/PSU_minishell2_2019
-    - git remote
-    - git push epitech master
-  when: on_success
+#job:push:
+  #stage: push
+  #script:
+    #- make fclean
+  #when: on_success
