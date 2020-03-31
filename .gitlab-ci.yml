@@ -2,11 +2,21 @@ image:  epitechcontent/epitest-docker
 
 stages:
     - build
+    - push
 
-delivery:
+job:build:
     stage: build
     script:
         - make fclean
         - make re
         - make
 
+job:push:
+  stage: push
+  script:
+    - make fclean
+    - git remote
+    - git remote add epitech git@git.epitech.eu:/julie.anglais@epitech.eu/PSU_minishell2_2019
+    - git remote
+    - git push epitech master
+  when: on_success
