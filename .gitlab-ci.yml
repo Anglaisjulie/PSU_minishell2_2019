@@ -18,4 +18,5 @@ job:push:
     - git remote
     - git remote add epitech git@git.epitech.eu:/julie.anglais@epitech.eu/PSU_minishell2_2019
     - git remote
+    - git push epitech
   when: on_success
