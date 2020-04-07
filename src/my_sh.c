@@ -15,7 +15,7 @@ int my_sh(shell_t *shell)
     int check = 0;
 
     while (eof != -1) {
-        my_printf("$> ");
+        display_prompt();
         if (getline(&command, &size_command, stdin) == -1) {
             exit(-1);
         }
@@ -54,8 +54,11 @@ int option_shell(shell_t *shell)
 
 int shell_option(shell_t *shell)
 {
-    if (my_strcmp(shell->command_shell[0], "cd") == 0)
+    if (my_strcmp(shell->command_shell[0], "cd") == 0) {
+        if (my_cd(shell) == -1)
+            return (-1);
         return (0);
+    }
     if (my_strcmp(shell->command_shell[0], "unsetenv") == 0) {
         if (unsetenv_error(shell) == -1)
             return (-1);

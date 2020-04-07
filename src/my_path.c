@@ -81,5 +81,5 @@ void add_command(shell_t *shell, int x, int a)
 {
     shell->path_env[x][a] = '/';
     for (int y = 0; shell->command_shell[0][y] != '\0'; y++)
-            shell->path_env[x][a + (y + 1)] = shell->command_shell[0][y];
+        shell->path_env[x][a + (y + 1)] = shell->command_shell[0][y];
 }

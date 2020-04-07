@@ -16,10 +16,13 @@ FILE_LIST = 	cpy_env.c 								 \
 				my_unsetenv.c							 \
 				env_fils.c                      	     \
 				my_path.c                       	     \
+				my_prompt.c                       	     \
 				my_setenv_error.c               	     \
 				my_setenv_name.c                	     \
 				my_setenv_not_name.c            	     \
 				my_sh.c                         	     \
+				my_cd.c                         	     \
+				my_basic_cd.c                            \
 				my_str_to_word_array.c          	     \
 
 SRC	= 	$(addprefix $(SRC_DIR), $(FILE_LIST))
