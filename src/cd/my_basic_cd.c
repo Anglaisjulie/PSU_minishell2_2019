@@ -68,7 +68,7 @@ int cd_with_path(shell_t *shell, int loc_pwd, int loc_oldpwd)
     return (0);
 }
 
-int cd_two_point(shell_t *shell, int loc_pwd, char *stock)
+void cd_two_point(shell_t *shell, int loc_pwd, char *stock)
 {
     int loc_oldpwd = location_of_oldpwd(shell);
     int slash = 0;

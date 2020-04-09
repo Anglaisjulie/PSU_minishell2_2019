@@ -11,20 +11,22 @@ CC =	gcc -o
 
 SRC_DIR =	src/
 
-FILE_LIST = 	cpy_env.c 								 \
-				main.c 									 \
-				my_unsetenv.c							 \
-				env_fils.c                      	     \
-				my_path.c                       	     \
-				my_prompt.c                       	     \
-				my_setenv_error.c               	     \
-				my_setenv_name.c                	     \
-				my_setenv_not_name.c            	     \
+FILE_LIST =		main.c 									 \
 				my_sh.c                         	     \
-				my_cd.c                         	     \
-				my_cd_with_arg.c                         \
-				my_basic_cd.c                            \
-				my_str_to_word_array.c          	     \
+				bonus/my_prompt.c                 	     \
+				env/cpy_env.c 							 \
+				env/env_fils.c                           \
+				path_command/my_path.c           	     \
+				path_command/my_str_to_word_array.c      \
+				setenv/my_setenv_name.c            	     \
+				setenv/my_setenv_not_name.c        	     \
+				setenv/my_setenv_error.c                 \
+				unsetenv/my_unsetenv.c		     		 \
+				unsetenv/my_unsetenv_error.c             \
+				cd/my_cd.c                         	     \
+				cd/my_basic_cd.c                         \
+				cd/my_cd_with_arg.c                      \
+				cd/my_cd_error.c                         \
 
 SRC	= 	$(addprefix $(SRC_DIR), $(FILE_LIST))
 
@@ -44,6 +46,7 @@ $(NAME):	$(OBJ)
 			@echo -e "\033[1;33m[COMPILING TETRIS...]\033[0;30m"
 			$(CC) $@ $^ $(CFLAGS)
 			$(RM) $(addprefix $(SRC_DIR), *.o)
+			$(RM) $(addprefix $(SRC_DIR), */*.o)
 			@echo -e "\033[1;32m[SUCCESSFULLY TETRIS COMPLETED]\033[0;37m"
 
 clean:
