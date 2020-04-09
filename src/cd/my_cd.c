@@ -54,7 +54,8 @@ void change_pwd(shell_t *shell, int loc_pwd, char *path)
         path[x] = shell->env_shell[loc_pwd][i];
         x++;
     }
-    chdir(path);
+    if (chdir(path) == - 1)
+        printf("ERROR 1\n");
 }
 
 int replace_oldpwd(shell_t *shell, int loc_pwd, int loc_oldpwd)

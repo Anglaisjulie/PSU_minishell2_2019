@@ -55,10 +55,12 @@ int cd_with_path(shell_t *shell, int loc_pwd, int loc_oldpwd)
     int size = my_strlen(shell->command_shell[1])
                                     + 1 + my_strlen(shell->env_shell[loc_pwd]);
 
-    if (replace_oldpwd(shell, loc_pwd, loc_oldpwd) == FAILURE)
-        return (FAILURE);
     path = malloc(sizeof(char) * (size - 3));
     if (path == NULL)
+        return (FAILURE);
+    if (cd_path_name(shell, loc_pwd, path) == NO)
+            return (FAILURE);
+    if (replace_oldpwd(shell, loc_pwd, loc_oldpwd) == FAILURE)
         return (FAILURE);
     pwd = malloc(sizeof(char) * (size + 1));
     if (pwd == NULL)

@@ -73,7 +73,7 @@ void cd_pwd_with_path(shell_t *shell, int loc_pwd, char *pwd)
     shell->env_shell[loc_pwd] = pwd;
 }
 
-void cd_path_name(shell_t *shell, int loc_pwd, char *path)
+int cd_path_name(shell_t *shell, int loc_pwd, char *path)
 {
     int x = 0;
 
@@ -81,7 +81,16 @@ void cd_path_name(shell_t *shell, int loc_pwd, char *path)
         path[x] = shell->env_shell[loc_pwd][i];
         x++;
     }
-    chdir(path);
+    path[x] = '/';
+    for (int i = 0; shell->command_shell[1][i] != '\0'; i++) {
+        x++;
+        path[x] = shell->command_shell[1][i];
+    }
+    if (chdir(path) == - 1) {
+        cd_error(shell, path);
+        return (NO);
+    }
+    return (0);
 }
 
 int option_cd_path(shell_t *shell, int loc_pwd, char *pwd, char *path)
@@ -97,11 +106,14 @@ int option_cd_path(shell_t *shell, int loc_pwd, char *pwd, char *path)
         && shell->command_shell[1][0] == '.'
         && shell->command_shell[1][1] == '.') {
         path = "..";
+        printf("pwd: %s\n",shell->env_shell[loc_pwd]);
+        chdir(path);
+        printf("pwd: %s\n",shell->env_shell[loc_pwd]);
         cd_two_point(shell, loc_pwd, stock);
+        printf("pwd: %s\n",shell->env_shell[loc_pwd]);
     } else {
+        printf("a\n");
         cd_pwd_with_path(shell, loc_pwd, pwd);
-        cd_path_name(shell, loc_pwd, path);
     }
-    chdir(path);
     return (0);
 }

@@ -15,6 +15,7 @@
 #include <stdarg.h>
 
 #define FAILURE (84)
+#define NO (-2)
 
 typedef struct shell_s {
     char **env_shell;
@@ -95,6 +96,8 @@ int cd_with_path(shell_t *, int, int);
 void change_pwd(shell_t *, int, char *);
 int option_cd_path(shell_t *, int, char *, char *);
 void cd_two_point(shell_t *shell, int loc_pwd, char *stock);
+int cd_path_name(shell_t *shell, int loc_pwd, char *path);
+int cd_error(shell_t *shell, char *path);
 ////////////////////////////////////////////////////////////////////////////////
 
 
