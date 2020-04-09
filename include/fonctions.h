@@ -20,6 +20,7 @@ typedef struct shell_s {
     char **env_shell;
     char **command_shell;
     char **path_env;
+    int nb_command;
 } shell_t;
 
 //############################################################################//
@@ -91,9 +92,12 @@ int my_cd(shell_t *);
 int location_of_oldpwd(shell_t *);
 int location_of_home(shell_t *);
 int location_of_pwd(shell_t *);
-int cd_dash(shell_t *shell, int loc_pwd);
-int replace_oldpwd(shell_t *shell, int loc_pwd, int loc_oldpwd);
-void change_pwd(shell_t *shell, int loc_pwd, char *path);
+int cd_dash(shell_t *, int);
+int replace_oldpwd(shell_t *, int, int);
+int cd_with_path(shell_t *, int, int);
+void change_pwd(shell_t *, int, char *);
+int option_cd_path(shell_t *, int, char *, char *);
+int cd_two_point(shell_t *shell, int loc_pwd, char *stock);
 ////////////////////////////////////////////////////////////////////////////////
 
 

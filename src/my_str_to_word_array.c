@@ -22,6 +22,7 @@ int nb_word(shell_t *shell, char *command)
     if (shell->command_shell == NULL)
         return (84);
     shell->command_shell[len] = NULL;
+    shell->nb_command = len + 1;
     return (0);
 }
 

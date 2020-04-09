@@ -7,28 +7,6 @@
 
 #include "fonctions.h"
 
-int replace_oldpwd(shell_t *shell, int loc_pwd, int loc_oldpwd)
-{
-    char *oldpwd = NULL;
-    int a = 0;
-
-    oldpwd = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_pwd] + 4)));
-    if (oldpwd == NULL)
-        return (FAILURE);
-    oldpwd[a] = 'O';
-    a++;
-    oldpwd[a] = 'L';
-    a++;
-    oldpwd[a] = 'D';
-    a++;
-    for (int i = 0; shell->env_shell[loc_pwd][i] != '\0'; i++) {
-        oldpwd[a] = shell->env_shell[loc_pwd][i];
-        a++;
-    }
-    shell->env_shell[loc_oldpwd] = oldpwd;
-    return (0);
-}
-
 void new_pwd(shell_t *shell, int loc_pwd, char *home)
 {
     int loc_home = location_of_home(shell);
@@ -49,18 +27,6 @@ void new_pwd(shell_t *shell, int loc_pwd, char *home)
     shell->env_shell[loc_pwd] = home;
 }
 
-void change_pwd(shell_t *shell, int loc_pwd, char *path)
-{
-    int loc_home = location_of_home(shell);
-    int x = 0;
-
-    for (int i = 5; shell->env_shell[loc_home][i] != '\0'; i++) {
-        path[x] = shell->env_shell[loc_home][i];
-        x++;
-    }
-    chdir(path);
-}
-
 int simple_cd(shell_t *shell, int loc_pwd, int loc_oldpwd)
 {
     char *home = NULL;
@@ -73,7 +39,7 @@ int simple_cd(shell_t *shell, int loc_pwd, int loc_oldpwd)
     if (home == NULL)
         return (FAILURE);
     home[my_strlen(shell->env_shell[loc_home])] = '\0';
-    path = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_pwd]- 4)));
+    path = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_pwd] - 4)));
     if (path == NULL)
         return (FAILURE);
     path[my_strlen(shell->env_shell[loc_pwd]) - 5] = '\0';
@@ -82,24 +48,66 @@ int simple_cd(shell_t *shell, int loc_pwd, int loc_oldpwd)
     return (0);
 }
 
+int cd_with_path(shell_t *shell, int loc_pwd, int loc_oldpwd)
+{
+    char *path = NULL;
+    char *pwd = NULL;
+    int size = my_strlen(shell->command_shell[1])
+                                    + 1 + my_strlen(shell->env_shell[loc_pwd]);
+
+    if (replace_oldpwd(shell, loc_pwd, loc_oldpwd) == FAILURE)
+        return (FAILURE);
+    path = malloc(sizeof(char) * (size - 3));
+    if (path == NULL)
+        return (FAILURE);
+    pwd = malloc(sizeof(char) * (size + 1));
+    if (pwd == NULL)
+        return (FAILURE);
+    if (option_cd_path(shell, loc_pwd, pwd, path) == FAILURE)
+        return (FAILURE);
+    return (0);
+}
+
+int cd_two_point(shell_t *shell, int loc_pwd, char *stock)
+{
+    int loc_oldpwd = location_of_oldpwd(shell);
+    int slash = 0;
+    int count = 0;
+    int x = 0;
+
+    for (int i = 7; shell->env_shell[loc_oldpwd][i] != '\0'; i++) {
+        if (shell->env_shell[loc_oldpwd][i] == '/')
+            slash++;
+    }
+    for (int i = 3; shell->env_shell[loc_oldpwd][i] != '\0'; i++) {
+        if (shell->env_shell[loc_oldpwd][i] == '/')
+            count++;
+        if (count < slash) {
+            stock[x] = shell->env_shell[loc_oldpwd][i];
+            x++;
+        }
+    }
+    shell->env_shell[loc_pwd] = stock;
+}
+
 int my_cd(shell_t *shell)
 {
     int loc_pwd = location_of_pwd(shell);
     int loc_oldpwd = location_of_oldpwd(shell);
-    int nb_command = 0;
 
-    for (; shell->command_shell[nb_command] != NULL; nb_command++);
-    if (nb_command == 1)
+    if (shell->nb_command == 1)
         if (simple_cd(shell, loc_pwd, loc_oldpwd) == FAILURE)
             return (FAILURE);
-    if (nb_command == 2) {
+    if (shell->nb_command == 2) {
         if (shell->command_shell[1][0] == '-'
                                         && shell->command_shell[1][1] == '\0') {
             if (cd_dash(shell, loc_pwd) == FAILURE)
                 return (FAILURE);
         }
-        //if (shell->command_shell[1] == "..");
+        else {
+            if (cd_with_path(shell, loc_pwd, loc_oldpwd) == FAILURE)
+                return (FAILURE);
+        }
     }
-
     return (0);
 }

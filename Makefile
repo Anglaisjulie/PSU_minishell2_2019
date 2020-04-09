@@ -22,6 +22,7 @@ FILE_LIST = 	cpy_env.c 								 \
 				my_setenv_not_name.c            	     \
 				my_sh.c                         	     \
 				my_cd.c                         	     \
+				my_cd_with_arg.c                         \
 				my_basic_cd.c                            \
 				my_str_to_word_array.c          	     \
 
