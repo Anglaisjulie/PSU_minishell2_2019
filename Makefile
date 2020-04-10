@@ -25,6 +25,7 @@ FILE_LIST =		main.c 									 \
 				unsetenv/my_unsetenv_error.c             \
 				cd/my_cd.c                         	     \
 				cd/my_basic_cd.c                         \
+				cd/my_cd_two_point.c                     \
 				cd/my_cd_with_arg.c                      \
 				cd/my_cd_error.c                         \
 

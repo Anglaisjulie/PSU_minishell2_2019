@@ -12,16 +12,14 @@ int detection_path_env(shell_t *shell)
     int location = -1;
     int n = 0;
 
-    for (int i = 0; shell->env_shell[i] != NULL; i++) {
+    for (int i = 0; shell->env_shell[i] != NULL; i++)
         if (my_strncmp(shell->env_shell[i], "PATH=", 5) == 0)
             location = i;
-    }
     if (location == -1)
         return (84);
-    for (int i = 0; shell->env_shell[location][i] != '\0'; i++) {
+    for (int i = 0; shell->env_shell[location][i] != '\0'; i++)
         if (shell->env_shell[location][i] == ':')
             n++;
-    }
     n += 1;
     shell->path_env = malloc(sizeof(char *) * (n + 1));
     if (shell->path_env == NULL)

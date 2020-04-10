@@ -59,7 +59,7 @@ int cd_with_path(shell_t *shell, int loc_pwd, int loc_oldpwd)
     if (path == NULL)
         return (FAILURE);
     if (cd_path_name(shell, loc_pwd, path) == NO)
-            return (FAILURE);
+        return (FAILURE);
     if (replace_oldpwd(shell, loc_pwd, loc_oldpwd) == FAILURE)
         return (FAILURE);
     pwd = malloc(sizeof(char) * (size + 1));
@@ -101,15 +101,8 @@ int my_cd(shell_t *shell)
         if (simple_cd(shell, loc_pwd, loc_oldpwd) == FAILURE)
             return (FAILURE);
     if (shell->nb_command == 2) {
-        if (shell->command_shell[1][0] == '-'
-                                        && shell->command_shell[1][1] == '\0') {
-            if (cd_dash(shell, loc_pwd) == FAILURE)
-                return (FAILURE);
-        }
-        else {
-            if (cd_with_path(shell, loc_pwd, loc_oldpwd) == FAILURE)
-                return (FAILURE);
-        }
+        if (cd_two_command(shell, loc_pwd, loc_oldpwd) == FAILURE)
+            return (FAILURE);
     }
     return (0);
 }

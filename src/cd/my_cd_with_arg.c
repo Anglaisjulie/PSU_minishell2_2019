@@ -95,8 +95,12 @@ int cd_path_name(shell_t *shell, int loc_pwd, char *path)
 
 int option_cd_path(shell_t *shell, int loc_pwd, char *pwd, char *path)
 {
+    char *new_pwd = NULL;
     char *stock = NULL;
 
+    new_pwd = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_pwd])));
+    if (new_pwd == NULL)
+        return (FAILURE);
     stock = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_pwd])));
     if (stock == NULL)
         return (FAILURE);
@@ -105,15 +109,8 @@ int option_cd_path(shell_t *shell, int loc_pwd, char *pwd, char *path)
     if (my_strlen(shell->command_shell[1]) == 2
         && shell->command_shell[1][0] == '.'
         && shell->command_shell[1][1] == '.') {
-        path = "..";
-        printf("pwd: %s\n",shell->env_shell[loc_pwd]);
-        chdir(path);
-        printf("pwd: %s\n",shell->env_shell[loc_pwd]);
-        cd_two_point(shell, loc_pwd, stock);
-        printf("pwd: %s\n",shell->env_shell[loc_pwd]);
-    } else {
-        printf("a\n");
+        cd_with_point(shell, loc_pwd, new_pwd, stock);
+    } else
         cd_pwd_with_path(shell, loc_pwd, pwd);
-    }
     return (0);
 }
