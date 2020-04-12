@@ -79,7 +79,7 @@ int my_sh(shell_t *shell)
     while (eof != -1) {
         display_prompt();
         if (getline(&command, &size_command, stdin) == -1) {
-            exit(-1);
+            break;
         }
         select_command(shell, command, check);
     }
