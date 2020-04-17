@@ -11,9 +11,8 @@
 
 void pid_fils_action(shell_t *shell, int error)
 {
-    for (int i = 0; shell->path_env[i] != NULL; i++) {
+    for (int i = 0; shell->path_env[i] != NULL; i++)
         error = my_path(shell, i, error);
-    }
     if (error == -1) {
         my_printf("%s : Command not found.\n", shell->command_shell[0]);
         exit (0);
@@ -35,8 +34,23 @@ int all_fonctions(shell_t *shell)
     return (0);
 }
 
+int create_av(shell_t *shell, int i)
+{
+    int len = my_strlen(shell->command_shell);
+
+    shell->av = malloc(sizeof(char *) * (len + 1));
+    if (shell->av == NULL)
+        return (FAILURE);
+    shell->av[len] = NULL;
+    shell->av[0] = shell->path_env[i];
+    for (int i = 1; i != len; i++)
+        shell->av[i] = shell->command_shell[i];
+}
+
 int my_path(shell_t *shell, int i, int error)
 {
+    if (create_av(shell, i) == FAILURE)
+        return (FAILURE);
     if (shell->command_shell[0][0] == '.'
                                         && shell->command_shell[0][1] == '/') {
         error = execve(shell->command_shell[0],
@@ -44,9 +58,7 @@ int my_path(shell_t *shell, int i, int error)
     } else if (shell->command_shell[0][0] == '/') {
         error = execve(shell->command_shell[0],
                                     shell->command_shell, shell->env_shell);
-    } else {
-        error = execve(shell->path_env[i],
-                                    shell->command_shell, shell->env_shell);
-    }
+    } else
+        error = execve(shell->av[0], shell->av, shell->env_shell);
     return (error);
 }

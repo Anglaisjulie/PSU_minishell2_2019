@@ -22,6 +22,7 @@ typedef struct shell_s {
     char **command_shell;
     char **path_env;
     int nb_command;
+    char **av;
 } shell_t;
 
 //############################################################################//

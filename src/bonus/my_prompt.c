@@ -14,7 +14,7 @@ int display_prompt(void)
     prompt = getcwd(NULL, 0);
     if (prompt == NULL)
         return (FAILURE);
-    my_printf("[%s] $> ", prompt);
+    my_printf("[%s] $ ", prompt);
     free(prompt);
     return (0);
 }

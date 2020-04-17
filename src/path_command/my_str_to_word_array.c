@@ -17,8 +17,8 @@ int nb_word(shell_t *shell, char *command)
         } else if (command[k] == ' ' || command[k] == '\t')
             len++;
     }
-    shell->command_shell = malloc(sizeof(char *) * (len + 1));
-    shell->command_shell[len] = NULL;
+    shell->command_shell = malloc(sizeof(char *) * (len));
+    shell->command_shell[len - 1] = NULL;
     if (shell->command_shell == NULL)
         return (84);
     shell->command_shell[len] = NULL;
