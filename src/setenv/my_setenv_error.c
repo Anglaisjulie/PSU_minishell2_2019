@@ -13,8 +13,7 @@ int setenv_error(shell_t *shell)
 
     if (shell->env_shell == NULL)
         return (-1);
-    for (; shell->command_shell[i] != NULL; i++);
-    if (i > 3) {
+    if (shell->nb_command > 3) {
         my_printf("setenv: Too many arguments.\n");
         return (-1);
     }
