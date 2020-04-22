@@ -2,6 +2,7 @@ image:  epitechcontent/epitest-docker
 
 stages:
     - build
+    - tests
 
 job:build:
     stage: build
@@ -9,3 +10,14 @@ job:build:
         - make fclean
         - make re
         - make
+
+job:tests:
+    stage: tests
+    script:
+        - tests/git_minishell_tests.sh
+
+job:norme:
+    stage: norme
+    script:
+        - tests/NormEZ.sh
+    allow_failure : true
