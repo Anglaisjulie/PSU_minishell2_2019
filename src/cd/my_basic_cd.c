@@ -107,8 +107,9 @@ int my_cd(shell_t *shell)
             return (FAILURE);
         else if (error == 1)
             return (1);
-    } else {
-        my_printf("%s: Too many arguments.\n", shell->command_shell[1]);
+    }
+    if (shell->nb_command_one > 2) {
+        my_printf("%s: Too many arguments.\n", shell->command_shell[0]);
         return (1);
     }
     return (0);

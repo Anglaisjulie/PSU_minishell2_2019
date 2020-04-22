@@ -16,7 +16,7 @@ int my_setenv(shell_t *shell)
         if (shell->command_shell[1][a] == '=') {
             my_printf
             ("setenv: Variable name must contain alphanumeric characters.\n");
-            return (-1);
+            return (1);
         }
     for (; shell->env_shell[i] != NULL; i++) {
         if (my_strncmp(shell->env_shell[i], shell->command_shell[1], len)

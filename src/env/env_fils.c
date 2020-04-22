@@ -35,7 +35,6 @@ int all_fonctions(shell_t *shell)
         wait(&status);
     if (status == 256)
         status = 1;
-    //printf("%d\n", status);
     return (status);
 }
 
@@ -55,6 +54,8 @@ int create_av(shell_t *shell, int i)
 
 int my_path(shell_t *shell, int i, int error)
 {
+    char *exe = NULL;
+
     if (create_av(shell, i) == FAILURE)
         return (FAILURE);
     if (shell->command_shell[0][0] == '.'
@@ -64,7 +65,10 @@ int my_path(shell_t *shell, int i, int error)
     } else if (shell->command_shell[0][0] == '/') {
         error = execve(shell->command_shell[0],
                                     shell->command_shell, shell->env_shell);
-    } else
-        error = execve(shell->av[0], shell->av, shell->env_shell);
+    } else {
+        exe = shell->av[0];
+        shell->av[0] = shell->command_shell[0];
+        error = execve(exe, shell->av, shell->env_shell);
+    }
     return (error);
 }

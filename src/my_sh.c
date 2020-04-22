@@ -32,12 +32,14 @@ int option_shell(shell_t *shell)
     int a = 0;
 
     if (my_strcmp(shell->command_shell[0], "env") == 0) {
-        if (print_env(shell) == -1)
-            return (-1);
+        if (print_env(shell) == 1)
+            return (1);
         return (0);
     }
     if (my_strcmp(shell->command_shell[0], "exit") == 0) {
-        exit(0);
+        if (my_exit(shell) == 1)
+            return (1);
+        return (0);
     }
     a = shell_option(shell);
     return (a);
@@ -82,7 +84,7 @@ int my_sh(shell_t *shell)
     int check = 0;
 
     while (eof != -1) {
-        display_prompt();
+        //display_prompt();
         if (getline(&command, &size_command, stdin) == -1) {
             break;
         }

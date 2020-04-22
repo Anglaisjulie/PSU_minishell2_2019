@@ -16,6 +16,7 @@ FILE_LIST =		main.c 									 \
 				bonus/my_prompt.c                 	     \
 				env/cpy_env.c 							 \
 				env/env_fils.c                           \
+				exit/exit.c   			                 \
 				path_command/my_path.c           	     \
 				path_command/my_str_to_word_array.c      \
 				path_command/separate_command.c     	 \

@@ -108,4 +108,6 @@ int cd_two_command(shell_t *shell, int loc_pwd, int loc_oldpwd);
 int separator_shell(shell_t *shell);
 void count_command(shell_t *shell);
 
+int my_exit(shell_t *shell);
+
 #endif
