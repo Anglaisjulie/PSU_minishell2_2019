@@ -52,7 +52,7 @@ Mkfile.old
 dkms.conf
 
 # Epitech related
-tests
 mysh
 vgcore.*
 .vscode
+minishell_tests.sh
