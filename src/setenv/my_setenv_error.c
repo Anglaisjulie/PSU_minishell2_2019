@@ -9,11 +9,9 @@
 
 int setenv_error(shell_t *shell)
 {
-    int i = 0;
-
     if (shell->env_shell == NULL)
         return (-1);
-    if (shell->nb_command > 3) {
+    if (shell->nb_command_one > 3) {
         my_printf("setenv: Too many arguments.\n");
         return (-1);
     }

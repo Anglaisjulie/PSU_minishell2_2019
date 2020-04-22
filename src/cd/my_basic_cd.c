@@ -97,10 +97,10 @@ int my_cd(shell_t *shell)
     int loc_pwd = location_of_pwd(shell);
     int loc_oldpwd = location_of_oldpwd(shell);
 
-    if (shell->nb_command == 1)
+    if (shell->nb_command_one == 1)
         if (simple_cd(shell, loc_pwd, loc_oldpwd) == FAILURE)
             return (FAILURE);
-    if (shell->nb_command == 2) {
+    if (shell->nb_command_one == 2) {
         if (cd_two_command(shell, loc_pwd, loc_oldpwd) == FAILURE)
             return (FAILURE);
     }

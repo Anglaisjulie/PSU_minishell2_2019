@@ -18,6 +18,7 @@ FILE_LIST =		main.c 									 \
 				env/env_fils.c                           \
 				path_command/my_path.c           	     \
 				path_command/my_str_to_word_array.c      \
+				path_command/separate_command.c     	 \
 				setenv/my_setenv_name.c            	     \
 				setenv/my_setenv_not_name.c        	     \
 				setenv/my_setenv_error.c                 \
@@ -28,6 +29,7 @@ FILE_LIST =		main.c 									 \
 				cd/my_cd_two_point.c                     \
 				cd/my_cd_with_arg.c                      \
 				cd/my_cd_error.c                         \
+				semicolons/semicolon.c                   \
 
 SRC	= 	$(addprefix $(SRC_DIR), $(FILE_LIST))
 
@@ -44,7 +46,7 @@ all:	$(NAME) clean
 
 $(NAME):	$(OBJ)
 			make -C ./lib/
-			@echo -e "\033[1;33m[COMPILING TETRIS...]\033[0;30m"
+			@echo -e "\033[1;33m[COMPILING TETRIS...]\033[0;32m"
 			$(CC) $@ $^ $(CFLAGS)
 			$(RM) $(addprefix $(SRC_DIR), *.o)
 			$(RM) $(addprefix $(SRC_DIR), */*.o)

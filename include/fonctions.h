@@ -20,9 +20,14 @@
 typedef struct shell_s {
     char **env_shell;
     char **command_shell;
+    char **all_command;
     char **path_env;
     int nb_command;
+    int number;
     char **av;
+    int index_command;
+    int len_total;
+    int nb_command_one;
 } shell_t;
 
 //############################################################################//
@@ -48,6 +53,7 @@ int my_command_shell(shell_t *, char *);
 ////////////////////////////////////////////////////////////////////////////////
 int detection_path_env(shell_t *);
 int my_path(shell_t *shell, int, int);
+int next_spaces(char *command);
 ////////////////////////////////////////////////////////////////////////////////
 //SETENV////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -98,6 +104,7 @@ int cd_error(shell_t *, char *);
 void cd_with_point(shell_t *shell, int loc_pwd, char *new_pwd, char *stock);
 int cd_two_command(shell_t *shell, int loc_pwd, int loc_oldpwd);
 ////////////////////////////////////////////////////////////////////////////////
-
+int separator_shell(shell_t *shell);
+void count_command(shell_t *shell);
 
 #endif

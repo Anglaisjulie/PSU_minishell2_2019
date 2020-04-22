@@ -36,7 +36,7 @@ int all_fonctions(shell_t *shell)
 
 int create_av(shell_t *shell, int i)
 {
-    int len = my_strlen(shell->command_shell);
+    int len = shell->nb_command_one;
 
     shell->av = malloc(sizeof(char *) * (len + 1));
     if (shell->av == NULL)
@@ -45,6 +45,7 @@ int create_av(shell_t *shell, int i)
     shell->av[0] = shell->path_env[i];
     for (int i = 1; i != len; i++)
         shell->av[i] = shell->command_shell[i];
+    return (0);
 }
 
 int my_path(shell_t *shell, int i, int error)

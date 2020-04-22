@@ -81,3 +81,13 @@ void add_command(shell_t *shell, int x, int a)
     for (int y = 0; shell->command_shell[0][y] != '\0'; y++)
         shell->path_env[x][a + (y + 1)] = shell->command_shell[0][y];
 }
+
+void count_command(shell_t *shell)
+{
+    for (int i = 0; i != shell->nb_command; i++) {
+        if (shell->all_command[i][0] == ';') {
+            shell->number++;
+        }
+    }
+    shell->number++;
+}
