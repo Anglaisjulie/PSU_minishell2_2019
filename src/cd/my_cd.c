@@ -62,9 +62,10 @@ int replace_oldpwd(shell_t *shell, int loc_pwd, int loc_oldpwd)
     char *oldpwd = NULL;
     int a = 0;
 
-    oldpwd = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_pwd] + 4)));
+    oldpwd = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_pwd]) + 3));
     if (oldpwd == NULL)
         return (FAILURE);
+    oldpwd[my_strlen(shell->env_shell[loc_pwd]) + 2] = '\0';
     oldpwd[a] = 'O';
     a++;
     oldpwd[a] = 'L';

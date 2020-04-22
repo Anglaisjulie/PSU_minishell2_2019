@@ -35,11 +35,11 @@ int simple_cd(shell_t *shell, int loc_pwd, int loc_oldpwd)
 
     if (replace_oldpwd(shell, loc_pwd, loc_oldpwd) == FAILURE)
         return (FAILURE);
-    home = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_home] + 1)));
+    home = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_home]) + 1));
     if (home == NULL)
         return (FAILURE);
     home[my_strlen(shell->env_shell[loc_home])] = '\0';
-    path = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_pwd] - 4)));
+    path = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_pwd]) - 4));
     if (path == NULL)
         return (FAILURE);
     path[my_strlen(shell->env_shell[loc_pwd]) - 5] = '\0';

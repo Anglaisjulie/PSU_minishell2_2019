@@ -35,7 +35,7 @@ int cd_dash(shell_t *shell, int loc_pwd)
     char *new = NULL;
     char *path = NULL;
 
-    new = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_oldpwd] + 1)));
+    new = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_oldpwd]) + 1));
     if (new == NULL)
         return (FAILURE);
     path = malloc(sizeof(char) * (my_strlen(shell->env_shell[loc_oldpwd]) - 4));
