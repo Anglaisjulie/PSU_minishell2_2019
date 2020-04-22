@@ -17,7 +17,7 @@ job:tests:
     script:
         - make
         - echo $RETURN
-        - tests/git_minishell_tests.sh
+        - RETURN = 'tests/git_minishell_tests.sh'
         - echo $RETURN
 
 job:norme:

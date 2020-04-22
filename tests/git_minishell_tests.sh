@@ -180,8 +180,7 @@ printf "\033[1;34mFailed: %d/%d\033[0m\n\n" $((TOTAL_TESTS-SUCCESS_TESTS)) $TOTA
 
 if [ "$((TOTAL_TESTS-SUCCESS_TESTS))" = "0" ]; then
     printf "\033[1;32m---------SUCCESS---------\n\n\033[0m"
-    RETURN=0
 else
     printf "\033[1;31m---------FAILURE---------\n\n\033[0m"
-    RETURN=1
+    echo $((1+2))
 fi
