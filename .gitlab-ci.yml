@@ -16,11 +16,13 @@ job:tests:
     stage: tests
     script:
         - make
+        - export $RETURN "0"
         - tests/git_minishell_tests.sh
+        - echo $RETURN
 
 job:norme:
     stage: norme
     script:
-        - tests/NormEZ.sh
+        - tests/NormEZ.rb
         - make fclean
     allow_failure : true

@@ -178,4 +178,10 @@ printf "\n\033[1;34m=== MINISHELL RESULT TESTS ===\033[0m\n"
 printf "\n\033[1;34mSuccess: %d/%d\n\033[0m" $SUCCESS_TESTS $TOTAL_TESTS
 printf "\033[1;34mFailed: %d/%d\033[0m\n\n" $((TOTAL_TESTS-SUCCESS_TESTS)) $TOTAL_TESTS
 
-printf "\033[1;36m=== MINISHELL FUNCTIONAL TESTS ===\033[0m\n\n"
+if [ "$((TOTAL_TESTS-SUCCESS_TESTS))" = "0" ]; then
+    printf "\033[1;32m---------SUCCESS---------\n\n\033[0m"
+    RETURN=0
+else
+    printf "\033[1;31m---------FAILURE---------\n\n\033[0m"
+    RETURN=1
+fi
