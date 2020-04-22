@@ -3,6 +3,7 @@ image:  epitechcontent/epitest-docker
 stages:
     - build
     - tests
+    - norme
 
 job:build:
     stage: build
