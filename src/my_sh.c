@@ -61,11 +61,18 @@ void select_command(shell_t *shell, char *command, int check)
 {
     if (my_strlen(command) != 1 && -1) {
         my_command_shell(shell, command);
-        check = option_shell(shell);
-        if (check == 1) {
-            my_path_env(shell);
-            all_fonctions(shell);
+        count_command(shell);
+        for (int i = 0; i != shell->number; i++)  {
+            separator_shell(shell);
+            check = option_shell(shell);
+            if (check == 1) {
+                my_path_env(shell);
+                all_fonctions(shell);
+            }
         }
+        shell->number = 0;
+        shell->index_command = 0;
+        shell->len_total = 0;
     }
 }
 
