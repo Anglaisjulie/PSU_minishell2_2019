@@ -182,5 +182,4 @@ if [ "$((TOTAL_TESTS-SUCCESS_TESTS))" = "0" ]; then
     printf "\033[1;32m---------SUCCESS---------\n\n\033[0m"
 else
     printf "\033[1;31m---------FAILURE---------\n\n\033[0m"
-    echo $((1+2))
 fi

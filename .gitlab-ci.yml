@@ -16,9 +16,7 @@ job:tests:
     stage: tests
     script:
         - make
-        - echo $RETURN
-        - $RETURN = 'tests/git_minishell_tests.sh'
-        - echo $RETURN
+        - tests/git_minishell_tests.sh
 
 job:norme:
     stage: norme
