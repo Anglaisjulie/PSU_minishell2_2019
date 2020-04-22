@@ -88,5 +88,6 @@ int my_command_shell(shell_t *shell, char *command)
             a++;
         }
     }
+    count_command(shell);
     return (0);
 }

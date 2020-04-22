@@ -63,7 +63,8 @@ int malloc_one_command(shell_t *shell)
             return (FAILURE);
         shell->command_shell[i][a] = '\0';
     }
-    new_command(shell, start, shell->index_command);
+    //if (shell->type_command == SEMICOLON)
+        new_command(shell, start, shell->index_command);
     return (0);
 }
 

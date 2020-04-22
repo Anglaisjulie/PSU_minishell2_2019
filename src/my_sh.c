@@ -60,7 +60,6 @@ int select_command(shell_t *shell, char *command, int check)
 
     if (my_strlen(command) != 1 && -1) {
         my_command_shell(shell, command);
-        count_command(shell);
         for (int i = 0; i != shell->number; i++)  {
             separator_shell(shell);
             error = option_shell(shell);
