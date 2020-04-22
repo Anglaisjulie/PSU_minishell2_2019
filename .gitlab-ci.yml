@@ -16,7 +16,7 @@ job:tests:
     stage: tests
     script:
         - make
-        - export $RETURN "0"
+        - echo $RETURN
         - tests/git_minishell_tests.sh
         - echo $RETURN
 
