@@ -15,10 +15,12 @@ job:build:
 job:tests:
     stage: tests
     script:
+        - make
         - tests/git_minishell_tests.sh
 
 job:norme:
     stage: norme
     script:
         - tests/NormEZ.sh
+        - make fclean
     allow_failure : true
