@@ -9,7 +9,7 @@ SUCCESS_TESTS=0
 
 compare ()
 {
-    if [ "$1" = "$2" ] && [ "$3" = "$4" ]; then
+    if [ "$1" = "$2" ]; then
         printf "\033[1;32mSuccess test %d (%s)\n\033[0m" $TOTAL_TESTS "$5"
         SUCCESS_TESTS=$((SUCCESS_TESTS+1))
     else

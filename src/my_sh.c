@@ -83,11 +83,11 @@ int my_sh(shell_t *shell)
     int check = 0;
 
     while (eof != -1) {
-        //display_prompt();
+        display_prompt();
         if (getline(&command, &size_command, stdin) == -1) {
             break;
         }
         shell->value_return = select_command(shell, command, check);
     }
-    return (shell->value_return);
+    return (0);
 }
