@@ -16,6 +16,8 @@ int main(int ac, char **av, char **env)
         return (84);
     if (my_cpy_env(&shell, env) == 84)
         return (84);
-    my_sh(&shell);
-    return (0);
+    if (my_sh(&shell) == 1) {
+        return (1);
+    } else
+        return (0);
 }

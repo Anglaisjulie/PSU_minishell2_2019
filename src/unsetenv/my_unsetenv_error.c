@@ -13,7 +13,7 @@ int unsetenv_error(shell_t *shell)
         return (-1);
     else if (shell->nb_command_one == 3) {
         my_printf("unsetenv: Too few arguments.\n");
-        return (-1);
+        return (1);
     } else if (my_unsetenv(shell) == - 1)
         return (-1);
     return (0);

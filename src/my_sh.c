@@ -10,21 +10,21 @@
 int shell_option(shell_t *shell)
 {
     if (my_strcmp(shell->command_shell[0], "cd") == 0) {
-        if (my_cd(shell) == -1)
-            return (-1);
+        if (my_cd(shell) == 1)
+            return (1);
         return (0);
     }
     if (my_strcmp(shell->command_shell[0], "unsetenv") == 0) {
-        if (unsetenv_error(shell) == -1)
-            return (-1);
+        if (unsetenv_error(shell) == 1)
+            return (1);
         return (0);
     }
     if (my_strcmp(shell->command_shell[0], "setenv") == 0) {
-        if (setenv_error(shell) == -1)
-            return (-1);
+        if (setenv_error(shell) == 1)
+            return (1);
         return (0);
     } else
-        return (1);
+        return (NO);
 }
 
 int option_shell(shell_t *shell)
@@ -37,15 +37,10 @@ int option_shell(shell_t *shell)
         return (0);
     }
     if (my_strcmp(shell->command_shell[0], "exit") == 0) {
-        my_printf("exit\n");
         exit(0);
     }
     a = shell_option(shell);
-    if (a == -1)
-        return (-1);
-    else if (a == 1)
-        return (1);
-    return (0);
+    return (a);
 }
 
 void add_value(int value, shell_t *shell, char *add, int i)
@@ -57,23 +52,26 @@ void add_value(int value, shell_t *shell, char *add, int i)
         }
 }
 
-void select_command(shell_t *shell, char *command, int check)
+int select_command(shell_t *shell, char *command, int check)
 {
+    int error = 0;
+
     if (my_strlen(command) != 1 && -1) {
         my_command_shell(shell, command);
         count_command(shell);
         for (int i = 0; i != shell->number; i++)  {
             separator_shell(shell);
-            check = option_shell(shell);
-            if (check == 1) {
+            error = option_shell(shell);
+            if (error == NO) {
                 my_path_env(shell);
-                all_fonctions(shell);
+                error = all_fonctions(shell);
             }
         }
         shell->number = 0;
         shell->index_command = 0;
         shell->len_total = 0;
     }
+    return (error);
 }
 
 int my_sh(shell_t *shell)
@@ -88,7 +86,7 @@ int my_sh(shell_t *shell)
         if (getline(&command, &size_command, stdin) == -1) {
             break;
         }
-        select_command(shell, command, check);
+        shell->value_return = select_command(shell, command, check);
     }
-    return (0);
+    return (shell->value_return);
 }

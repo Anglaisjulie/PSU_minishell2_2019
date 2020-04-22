@@ -17,9 +17,12 @@ int cd_error(shell_t *shell, char *path)
 
     error = stat(path, &stat_type);
     type = stat_type.st_mode & S_IFMT;
-    if (error != - 1 && type != S_IFDIR)
+    if (error != - 1 && type != S_IFDIR) {
         my_printf("%s: Not a directory.\n", shell->command_shell[1]);
-    else
+        return (1);
+    } else {
         my_printf("%s: No such file or directory.\n", shell->command_shell[1]);
+        return (1);
+    }
     return (0);
 }

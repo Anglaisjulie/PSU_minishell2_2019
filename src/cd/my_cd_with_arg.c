@@ -87,8 +87,8 @@ int cd_path_name(shell_t *shell, int loc_pwd, char *path)
         path[x] = shell->command_shell[1][i];
     }
     if (chdir(path) == - 1) {
-        cd_error(shell, path);
-        return (NO);
+        if (cd_error(shell, path) == 1)
+        return (1);
     }
     return (0);
 }

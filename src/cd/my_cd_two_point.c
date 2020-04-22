@@ -21,14 +21,19 @@ void cd_with_point(shell_t *shell, int loc_pwd, char *new_pwd, char *stock)
 
 int cd_two_command(shell_t *shell, int loc_pwd, int loc_oldpwd)
 {
+    int error = 0;
+
     if (shell->command_shell[1][0] == '-'
                                         && shell->command_shell[1][1] == '\0') {
         if (cd_dash(shell, loc_pwd) == FAILURE)
             return (FAILURE);
     }
     else {
-        if (cd_with_path(shell, loc_pwd, loc_oldpwd) == FAILURE)
+        error = cd_with_path(shell, loc_pwd, loc_oldpwd);
+        if (error == FAILURE)
             return (FAILURE);
+        else if (error == 1)
+            return (1);
     }
     return (0);
 }

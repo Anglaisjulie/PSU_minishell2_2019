@@ -9,29 +9,34 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 
-void pid_fils_action(shell_t *shell, int error)
+int pid_fils_action(shell_t *shell, int error)
 {
     for (int i = 0; shell->path_env[i] != NULL; i++)
         error = my_path(shell, i, error);
     if (error == -1) {
-        my_printf("%s : Command not found.\n", shell->command_shell[0]);
-        exit (0);
+        my_printf("%s: Command not found.\n", shell->command_shell[0]);
+        return (1);
     }
+    return (0);
 }
 
 int all_fonctions(shell_t *shell)
 {
     pid_t pid_fils;
     static int error = 0;
+    int status = 0;
 
     if (shell->env_shell == NULL)
         return (-1);
     pid_fils = fork();
-    if (pid_fils == 0) {
-        pid_fils_action(shell, error);
-    } else
-        wait(NULL);
-    return (0);
+    if (pid_fils == 0)
+        status = pid_fils_action(shell, error);
+    else
+        wait(&status);
+    if (status == 256)
+        status = 1;
+    //printf("%d\n", status);
+    return (status);
 }
 
 int create_av(shell_t *shell, int i)
