@@ -9,7 +9,7 @@
 
 int option_separator(shell_t *shell)
 {
-    if (shell->nb_command - 1 == shell->len_total) {
+    if (shell->nb_command == shell->len_total) {
         return (1);
     } else if (shell->all_command[shell->index_command][0] == ';') {
         return (1);
@@ -33,7 +33,7 @@ void new_command(shell_t *shell, int start, int end)
     int count = 0;
     int x = 0;
 
-    if (start != 0 && shell->nb_command == shell->len_total + 1)
+    if (start != 0 && shell->nb_command == shell->len_total)
         end += 1;
     for (int i = start; i != end; i++) {
         count++;
@@ -71,7 +71,7 @@ int separator_shell(shell_t *shell)
 {
     if (shell->number == 1) {
         shell->command_shell = shell->all_command;
-        shell->nb_command_one = shell->nb_command;
+        shell->nb_command_one = shell->nb_command + 1;
         return (0);
     }
     malloc_one_command(shell);
