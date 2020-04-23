@@ -61,7 +61,7 @@ execute "exitt" "0"
 printf "\n\033[1;33m=== MINISHELL SPACES AND TABS TESTS ===\033[0m\n\n"
 
 #only spaces
-#execute "    " "0"
+execute "    " "0"
 #execute "     ls             -l      -all     " "0"
 #only tabs
 #execute "\tls\t-l\t-all\t" "0"
@@ -141,13 +141,13 @@ execute "exit -" "0"
 
 ### WITHOUT PATH TESTS ###
 
-printf "\n\033[1;33m=== MINISHELL WITHOUT PATH TESTS ===\033[0m\n\n"
+#printf "\n\033[1;33m=== MINISHELL WITHOUT PATH TESTS ===\033[0m\n\n"
 
 #execute "unsetenv PATH ; /bin/ls /" "1"
 
 ### PIPE TESTS ###
 
-printf "\n\033[1;33m=== MINISHELL PIPE TESTS ===\033[0m\n\n"
+#printf "\n\033[1;33m=== MINISHELL PIPE TESTS ===\033[0m\n\n"
 
 #execute "ls / | wc -l | cat -e" "0"
 #execute "ls / | cat -e | cat -e | cat -e | cat -e | cat -e" "0"
