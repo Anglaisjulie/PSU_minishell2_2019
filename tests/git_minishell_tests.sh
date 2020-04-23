@@ -62,11 +62,13 @@ printf "\n\033[1;33m=== MINISHELL SPACES AND TABS TESTS ===\033[0m\n\n"
 
 #only spaces
 execute "    " "0"
-#execute "     ls             -l      -all     " "0"
+execute "     ls             -l      -all     " "0"
+
 #only tabs
-#execute "\tls\t-l\t-all\t" "0"
+execute "\tls\t-l\t-all\t" "0"
+execute "\nls\t-l\n-all\t" "0"
 #tabs and spaces
-#execute "\tls      \t   -l  \t-all      \t   " "0"
+execute "\tls      \t   -l  \t-all      \t   " "0"
 
 ### CD TESTS ###
 

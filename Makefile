@@ -18,6 +18,7 @@ FILE_LIST =		main.c 									 \
 				env/env_fils.c                           \
 				exit/exit.c   			                 \
 				path_command/my_path.c           	     \
+				path_command/add_all_command.c     	     \
 				path_command/my_str_to_word_array.c      \
 				path_command/separate_command.c     	 \
 				setenv/my_setenv_name.c            	     \

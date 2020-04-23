@@ -12,10 +12,12 @@ int nb_word(shell_t *shell, char *command)
     int len = 0;
 
     for (int k = 0; command[k] != '\0'; k++) {
-        if ((command[k] == ' ' || command[k] == '\t')
-            && (command[k + 1] == ' ' || command[k + 1] == '\t')) {
-        } else if (command[k] == ' ' || command[k] == '\t')
+        if (((command[k] == ' ' || command[k] == '\t' || command[k] == '\\')
+            && ((command[k + 1] == ' ') || (command[k + 1] == '\t')))
+            || (command[k + 1] == '\n')) {
+        } else if ((command[k] == ' ' || command[k] == '\t')) {
             len++;
+        }
     }
     shell->all_command = malloc(sizeof(char *) * (len + 1));
     if (shell->all_command == NULL)
@@ -41,7 +43,8 @@ int command_malloc(shell_t *shell, char *command)
     int b = 0;
 
     for (int i = next_spaces(command); command[i] != '\0'; i++) {
-        if ((command[i] == ' ' || command[i] == '\t' || command[i] == '\n')
+        if ((command[i] == ' ' || command[i] == '\t' || command[i] == '\\'
+            || command[i] == '\n')
             && (command[i + 1] == ' ' || command[i + 1] == '\t'
             || command[i + 1] == '\n')) {
         } else if (command[i] == ' ' || command[i] == '\t'
@@ -70,24 +73,9 @@ int malloc_command(shell_t *shell, char *command)
 
 int my_command_shell(shell_t *shell, char *command)
 {
-    int i = 0;
-    int a = 0;
-
     if (malloc_command(shell, command) == 84)
         return (84);
-    for (int j = next_spaces(command); command[j] != '\0'; j++) {
-        if ((command[j] == ' ' || command[j] == '\t' || command[j] == '\n')
-            && (command[j + 1] == ' ' || command[j + 1] == '\t'
-            || command[j + 1] == '\n')) {
-        } else if (command[j] == ' ' || command[j] == '\t'
-            || command[j] == '\n') {
-            a = 0;
-            i++;
-        } else {
-            shell->all_command[i][a] = command[j];
-            a++;
-        }
-    }
+    add_all_command(shell, command);
     count_command(shell);
     return (0);
 }
