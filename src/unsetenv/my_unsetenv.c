@@ -12,7 +12,7 @@ int malloc_unsetenv(shell_t *shell, char **stock, int deleted)
     int line_size = 0;
     int i = 0;
 
-    for (int j = 0; stock[j + 1] != NULL; j++) {
+    for (int j = 0; stock[j] != NULL; j++) {
         line_size = my_strlen(stock[j]);
         shell->env_shell[j] = malloc(sizeof(char) * (line_size + 1));
         if (shell->env_shell[j] == NULL)

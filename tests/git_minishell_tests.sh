@@ -82,7 +82,7 @@ execute "cd lib ; pwd" "0"
 execute "cd lib ; cd - ; pwd" "0"
 execute "cd toto tata" "0"
 execute "cd fail_dir" "0"
-#execute "unsetenv HOME ; cd" "1"
+execute "unsetenv HOME ; cd" "1"
 #execute "unsetenv OLDPWD ; cd -" "1"
 
 ### PATH TESTS ###
@@ -179,7 +179,7 @@ execute "ls ; ls ; ls ; ls ; ls ; ls ; ls" "0"
 
 printf "\n\033[1;33m=== OTHER TESTS ===\033[0m\n\n"
 
-#execute "\0" "0"
+execute "\0" "0"
 execute "unsetenv PATH; setenv PATH /bin/ ; ls /" "0"
 execute "./ls" "0"
 
