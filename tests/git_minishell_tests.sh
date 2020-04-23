@@ -67,6 +67,7 @@ execute "     ls             -l      -all     " "0"
 #only tabs
 execute "\tls\t-l\t-all\t" "0"
 execute "\nls\t-l\n-all\t" "0"
+
 #tabs and spaces
 execute "\tls      \t   -l  \t-all      \t   " "0"
 
@@ -161,10 +162,10 @@ execute "exit -" "0"
 printf "\n\033[1;33m=== MINISHELL PERMISSIONS AND EXECUTION TESTS ===\033[0m\n\n"
 
 execute "mysh" "0"
-#execute "../bin/ls" "0"
+execute "../bin/ls" "1"
 execute "./bin/ls" "0"
 execute "/bin/ls" "0"
-#execute "./lib" "0"
+execute "./lib" "0"
 
 ### SEMICOLON TESTS ###
 

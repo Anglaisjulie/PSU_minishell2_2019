@@ -33,11 +33,13 @@ typedef struct shell_s {
     int nb_command;
     int number;
     char **av;
+    char *exe;
     int value_return;
     int index_command;
     int len_total;
     int nb_command_one;
     int type_command;
+    int check;
 } shell_t;
 
 //############################################################################//
