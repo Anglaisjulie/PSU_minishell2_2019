@@ -94,6 +94,7 @@ execute "ls -l ; ls -a ; ls" "0"
 
 printf "\n\033[1;33m=== MINISHELL ENV TESTS ===\033[0m\n\n"
 
+execute "setenv toto% =a ; unsetenv toto%" "0"
 execute "setenv _toto tata" "0"
 execute "setenv 8toto tata" "0"
 execute "setenv toto tata titi" "0"
