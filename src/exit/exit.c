@@ -44,6 +44,8 @@ int error_exit(shell_t *shell)
 
 int my_exit(shell_t *shell)
 {
+    if (shell->number > 1 && shell->len_total != shell->nb_command)
+        return (0);
     if (shell->nb_command_one == 1)
         exit (0);
     if (shell->nb_command_one == 2) {

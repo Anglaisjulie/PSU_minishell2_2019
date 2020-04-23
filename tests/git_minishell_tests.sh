@@ -126,9 +126,9 @@ execute "exit abc" "0"
 execute "exit -18abc" "0"
 
 #advance
-#execute "exit 12; ls" "0"
-#execute "exit 12; exit 123" "0"
-#execute "exit 12; exit -a123" "0"
+execute "exit 12 ; ls" "0"
+execute "exit 12 ; exit 123" "0"
+execute "exit 12 ; exit -a123" "0"
 execute "exit -" "0"
 
 ### WITHOUT PATH TESTS ###
