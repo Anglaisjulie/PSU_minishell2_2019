@@ -94,7 +94,6 @@ execute "ls -l ; ls -a ; ls" "0"
 
 printf "\n\033[1;33m=== MINISHELL ENV TESTS ===\033[0m\n\n"
 
-execute "setenv toto% =a ; unsetenv toto%" "0"
 execute "setenv _toto tata" "0"
 execute "setenv 8toto tata" "0"
 execute "setenv toto tata titi" "0"
@@ -111,6 +110,14 @@ execute "unsetenv tototototototo" "0"
 execute "unsetenv PATH" "0"
 execute "unsetenv PWD" "0"
 execute "unsetenv PATH HOME OLDPWD PWD LESS" "0"
+
+execute "setenv toto% =a ; unsetenv toto%" "0"
+execute "setenv %PWD a ; unsetenv %PWD" "0"
+execute "setenv to_to ; unsetenv to_to" "0"
+execute "setenv PWD = ; unsetenv PWD" "0"
+execute "unsetenv PWD ; setenv OTHER a" "0"
+execute "unsetenv a ; setenv PWD a" "0"
+execute "unsetenv ZSH ; setenv OTHER" "0"
 
 ### EXIT TESTS ###
 

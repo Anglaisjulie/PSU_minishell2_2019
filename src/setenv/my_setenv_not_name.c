@@ -38,9 +38,7 @@ int malloc_env_notknow_name(shell_t *shell, char **stock)
 
     for (int k = 0; shell->env_shell[k] != NULL; k++) {
         stock[k] = my_strcpy(stock[k], shell->env_shell[k]);
-        free(shell->env_shell[k]);
     }
-    free(shell->env_shell);
     for (; stock[i] != NULL; i++);
     shell->env_shell = malloc(sizeof(char *) * (i + 2));
     shell->env_shell[i + 1] = NULL;
@@ -79,11 +77,9 @@ int not_know_name(shell_t *shell, int j, char **stock, int line_size)
         shell->env_shell[j] = malloc(sizeof(char) * (line_size + 1));
         shell->env_shell[j][line_size] = '\0';
         shell->env_shell[j] = my_strcpy(shell->env_shell[j], stock[j]);
-        free(stock[j]);
         if (shell->env_shell[j] == NULL)
             return (-1);
     }
-    free(stock);
     return (j);
 }
 
@@ -105,6 +101,5 @@ int add_name_value_env(shell_t *shell, int j, int i)
     i++;
     add_value(value, shell, add, i);
     shell->env_shell[j] = my_strcpy(shell->env_shell[j], add);
-    free(add);
     return (0);
 }
