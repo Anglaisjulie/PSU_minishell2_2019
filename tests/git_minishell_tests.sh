@@ -108,6 +108,7 @@ execute "setenv zbc Zbc" "0"
 execute "unsetenv" "0"
 execute "unsetenv tototototototo" "0"
 execute "unsetenv PATH" "0"
+execute "unsetenv PWD" "0"
 execute "unsetenv PATH HOME OLDPWD PWD LESS" "0"
 
 ### EXIT TESTS ###
