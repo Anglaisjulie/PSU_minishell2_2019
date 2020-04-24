@@ -33,7 +33,7 @@ FILE_LIST =		main.c 									 \
 				cd/my_cd_slash.c                         \
 				cd/my_cd_error.c                         \
 				semicolons/semicolon.c                   \
-				signal.c    							 \
+				signals/signal.c        				 \
 
 SRC	= 	$(addprefix $(SRC_DIR), $(FILE_LIST))
 
