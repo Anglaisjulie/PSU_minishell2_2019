@@ -8,14 +8,25 @@
 #include "fonctions.h"
 #include <sys/types.h>
 #include <sys/wait.h>
+#include <errno.h>
 
 int pid_fils_action(shell_t *shell, int error)
 {
     for (int i = 0; shell->path_env[i] != NULL; i++)
         error = my_path(shell, i, error);
     if (error == -1 || error == 2) {
-        my_printf("%s: Command not found.\n", shell->command_shell[0]);
-        return (1);
+        if (errno == EACCES) {
+            my_printf("%s: Permission denied.", shell->command_shell[0]);
+            return (1);
+        }
+        if (errno == ENOENT) {
+            my_printf("%s: Command not found.", shell->command_shell[0]);
+            return (1);
+        }
+        if (errno == ENOTDIR) {
+            my_printf("%s: Not a directory.", shell->command_shell[0]);
+            return (1);
+        }
     }
     return (0);
 }
@@ -81,9 +92,11 @@ int my_path(shell_t *shell, int i, int error)
     if (shell->command_shell[0][0] == '.'
         && shell->command_shell[0][1] == '.' && shell->check == 0) {
         shell->check++;
-        return (-1);
-    } else if (shell->check > 0)
+        return (1);
+    } else if (shell->check > 0) {
+        errno = ENOENT;
         return (2);
+    }
     error = option_exe(shell, error);
     return (error);
 }
