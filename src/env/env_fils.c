@@ -14,10 +14,10 @@ int pid_fils_action(shell_t *shell, int error)
     for (int i = 0; shell->path_env[i] != NULL; i++)
         error = my_path(shell, i, error);
     if (access(shell->exe, R_OK) == -1 || error == 1) {
-        my_printf("%s: Command not found.\n", shell->command_shell[0]);
+        my_printf("%s: Permission denied.\n", shell->command_shell[0]);
         return (1);
     } else if (error == -1) {
-        my_printf("%s: Permission denied.\n", shell->command_shell[0]);
+        my_printf("%s: Command not found.\n", shell->command_shell[0]);
         return (1);
     }
     return (0);

@@ -98,6 +98,10 @@ int my_cd(shell_t *shell)
     int loc_oldpwd = location_of_oldpwd(shell);
     int error = 0;
 
+    if (env_home(shell) == FAILURE) {
+        my_printf("%s: No home directory.\n", shell->command_shell[0]);
+        return (1);
+    }
     if (shell->nb_command_one == 1)
         if (simple_cd(shell, loc_pwd, loc_oldpwd) == FAILURE)
             return (FAILURE);
