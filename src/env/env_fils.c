@@ -13,7 +13,7 @@ int pid_fils_action(shell_t *shell, int error)
 {
     for (int i = 0; shell->path_env[i] != NULL; i++)
         error = my_path(shell, i, error);
-    if (access(shell->exe, R_OK) == -1) {
+    if (access(shell->exe, R_OK) == -1 || error == 1) {
         my_printf("%s: Command not found.\n", shell->command_shell[0]);
         return (1);
     } else if (error == -1) {
@@ -28,7 +28,6 @@ int all_fonctions(shell_t *shell)
     pid_t pid_fils;
     static int error = 0;
     int status = 0;
-    shell->check = 0;
 
     if (shell->env_shell == NULL)
         return (-1);
