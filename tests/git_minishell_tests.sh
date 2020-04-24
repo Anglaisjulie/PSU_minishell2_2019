@@ -144,9 +144,9 @@ execute "exit -" "0"
 
 ### WITHOUT PATH TESTS ###
 
-#printf "\n\033[1;33m=== MINISHELL WITHOUT PATH TESTS ===\033[0m\n\n"
+printf "\n\033[1;33m=== MINISHELL WITHOUT PATH TESTS ===\033[0m\n\n"
 
-#execute "unsetenv PATH ; /bin/ls /" "1"
+execute "unsetenv PATH ; /bin/ls /" "1"
 
 ### PIPE TESTS ###
 
