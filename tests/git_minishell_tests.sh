@@ -76,7 +76,7 @@ execute "\tls      \t   -l  \t-all      \t   " "0"
 printf "\n\033[1;33m=== MINISHELL CD TESTS ===\033[0m\n\n"
 
 #execute "cd / ; pwd" "0"
-#execute "cd - ; pwd" "0"
+execute "cd - ; pwd" "0"
 execute "cd .. ; pwd" "0"
 execute "cd lib ; pwd" "0"
 execute "cd lib ; cd - ; pwd" "0"
