@@ -27,21 +27,21 @@ int env_home(shell_t *shell)
 int env_oldpwd(shell_t *shell)
 {
     int a = 0;
-    int pwd = 0;
     int oldpwd = 0;
+    char *pwd = NULL;
 
-    for (int i = 0; shell->env_shell[i] != NULL; i++) {
-        if (my_strncmp(shell->env_shell[i], "PWD=", 7) == 0)
-            pwd = i;
-    }
+    pwd = getcwd(NULL, 0);
+    if (pwd == NULL)
+        return (FAILURE);
     for (int i = 0; shell->env_shell[i] != NULL; i++) {
         if (my_strncmp(shell->env_shell[i], "OLDPWD=", 7) == 0) {
             a++;
             oldpwd = i;
         }
     }
-    if (my_strcmp(shell->env_shell[pwd], shell->env_shell[oldpwd]) == 0)
+    if (my_strncmp(shell->env_shell[oldpwd], pwd, my_strlen(pwd)) != 0) {
         a++;
+    }
     if (a == 2)
         return (0);
     return (FAILURE);
@@ -60,6 +60,23 @@ int other_error(shell_t *shell, char *path)
         return (1);
     } else {
         my_printf("%s: No such file or directory.\n", shell->command_shell[1]);
+        return (1);
+    }
+    return (0);
+}
+
+int start_error_cd(shell_t *shell)
+{
+    if (env_home(shell) == FAILURE) {
+        my_printf("%s: No home directory.\n", shell->command_shell[0]);
+        return (1);
+    }
+    if (env_oldpwd(shell) == FAILURE) {
+        my_printf(": No such file or directory.\n");
+        return (1);
+    }
+    if (shell->nb_command_one > 2) {
+        my_printf("%s: Too many arguments.\n", shell->command_shell[0]);
         return (1);
     }
     return (0);

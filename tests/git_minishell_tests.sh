@@ -83,7 +83,7 @@ execute "cd lib ; cd - ; pwd" "0"
 execute "cd toto tata" "0"
 execute "cd fail_dir" "0"
 execute "unsetenv HOME ; cd" "1"
-#execute "unsetenv OLDPWD ; cd -" "1"
+execute "unsetenv OLDPWD ; cd -" "1"
 
 ### PATH TESTS ###
 

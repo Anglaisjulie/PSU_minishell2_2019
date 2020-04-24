@@ -13,10 +13,7 @@ int pid_fils_action(shell_t *shell, int error)
 {
     for (int i = 0; shell->path_env[i] != NULL; i++)
         error = my_path(shell, i, error);
-    if (access(shell->exe, R_OK) == -1 || error == 1) {
-        my_printf("%s: Permission denied.\n", shell->command_shell[0]);
-        return (1);
-    } else if (error == -1) {
+    if (error == -1) {
         my_printf("%s: Command not found.\n", shell->command_shell[0]);
         return (1);
     }
@@ -83,7 +80,7 @@ int my_path(shell_t *shell, int i, int error)
     if (shell->command_shell[0][0] == '.'
         && shell->command_shell[0][1] == '.' && shell->check == 0) {
         shell->check++;
-        return (1);
+        return (-1);
     } else if (shell->check > 0)
         return (1);
     error = option_exe(shell, error);
