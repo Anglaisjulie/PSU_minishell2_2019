@@ -44,9 +44,7 @@ int all_fonctions(shell_t *shell)
         status = pid_fils_action(shell, error);
     else
         wait(&status);
-    if (status == 256)
-        status = 1;
-    return (status);
+    return (check_segfault(status));
 }
 
 int create_av(shell_t *shell, int i)

@@ -148,14 +148,14 @@ printf "\n\033[1;33m=== MINISHELL WITHOUT PATH TESTS ===\033[0m\n\n"
 
 execute "unsetenv PATH ; /bin/ls /" "1"
 
-### PIPE TESTS ###
+### ERROR HANDLING TESTS ###
 
-#printf "\n\033[1;33m=== MINISHELL PIPE TESTS ===\033[0m\n\n"
+printf "\n\033[1;33m=== MINISHELL ERROR HANDLING TESTS ===\033[0m\n\n"
 
-#execute "ls / | wc -l | cat -e" "0"
-#execute "ls / | cat -e | cat -e | cat -e | cat -e | cat -e" "0"
-#execute "ls / | cat -e | cat -e" "0"
-#execute "ls /|cat -e|cat -e" "0"
+execute "./tests/div_zero_core_dump" "0"
+execute "./tests/abort" "0"
+execute "./tests/seg_core_dump" "0"
+execute "./tests/seg_core_dump2" "0"
 
 ### PERMISSIONS AND EXECUTION TESTS ###
 
@@ -174,6 +174,15 @@ printf "\n\033[1;33m=== MINISHELL SEMICOLON TESTS ===\033[0m\n\n"
 execute "ls ; ls ; ls ; ls ; ls ; ls ; ls" "0"
 #execute "ls;ls;ls;ls;ls;ls;ls" "0"
 #execute "ls;exit 34;ls" "0"
+
+### PIPE TESTS ###
+
+#printf "\n\033[1;33m=== MINISHELL PIPE TESTS ===\033[0m\n\n"
+
+#execute "ls / | wc -l | cat -e" "0"
+#execute "ls / | cat -e | cat -e | cat -e | cat -e | cat -e" "0"
+#execute "ls / | cat -e | cat -e" "0"
+#execute "ls /|cat -e|cat -e" "0"
 
 ### OTHER TESTS ###
 
