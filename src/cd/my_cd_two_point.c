@@ -30,8 +30,11 @@ int cd_two_command(shell_t *shell, int loc_pwd, int loc_oldpwd, int a)
             return (1);
         } else if (cd_dash(shell, loc_pwd) == FAILURE)
             return (FAILURE);
-    }
-    else {
+    } else if (shell->command_shell[1][0] == '/'
+                                        && shell->command_shell[1][1] == '\0') {
+        if (cd_slash(shell, loc_pwd) == FAILURE)
+            return (FAILURE);
+    } else {
         error = cd_with_path(shell, loc_pwd, loc_oldpwd);
         if (error == FAILURE)
             return (FAILURE);

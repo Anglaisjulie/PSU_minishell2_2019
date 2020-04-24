@@ -30,6 +30,7 @@ FILE_LIST =		main.c 									 \
 				cd/my_basic_cd.c                         \
 				cd/my_cd_two_point.c                     \
 				cd/my_cd_with_arg.c                      \
+				cd/my_cd_slash.c                         \
 				cd/my_cd_error.c                         \
 				semicolons/semicolon.c                   \
 
