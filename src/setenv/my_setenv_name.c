@@ -18,14 +18,8 @@ int my_setenv(shell_t *shell)
             ("setenv: Variable name must contain alphanumeric characters.\n");
             return (1);
         }
-    for (; shell->env_shell[i] != NULL; i++) {
-        if (my_strncmp(shell->env_shell[i], shell->command_shell[1], len)
-                                                                == 0) {
-            if (malloc_stock_name(shell, i) == -1)
-                return (-1);
-            return (0);
-        }
-    }
+    if (stock_name(shell, i, len) == -1)
+        return (-1);
     if (malloc_stock_not_name(shell) == -1)
         return (-1);
     return (0);

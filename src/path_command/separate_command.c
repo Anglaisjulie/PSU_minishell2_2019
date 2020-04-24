@@ -48,7 +48,6 @@ void new_command(shell_t *shell, int start, int end)
 int malloc_one_command(shell_t *shell)
 {
     int a = 0;
-    int x = 0;
     int start = 0;
 
     start = size_command_exe(shell);

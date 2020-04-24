@@ -17,27 +17,34 @@ void exit_with_value(shell_t *shell)
 
 }
 
+int option_error_exit(shell_t *shell, int i)
+{
+    if ((shell->command_shell[1][0] < '0'
+        || shell->command_shell[1][0] > '9')
+        && (my_strlen(shell->command_shell[1]) == 1)) {
+        my_printf("exit: Expression Syntax.\n");
+        return (1);
+    }
+    if ((shell->command_shell[1][i] < '0'
+        || shell->command_shell[1][i] > '9')
+        && shell->command_shell[1][0] == '-') {
+        my_printf("exit: Badly formed number.\n");
+        return (1);
+    }
+    if ((shell->command_shell[1][i] < '0'
+        || shell->command_shell[1][i] > '9')
+        && shell->command_shell[1][0] != '-') {
+        my_printf("exit: Expression Syntax.\n");
+        return (1);
+    }
+    return (0);
+}
+
 int error_exit(shell_t *shell)
 {
     for (int i = 1; shell->command_shell[1][i] != '\0'; i++) {
-        if ((shell->command_shell[1][0] < '0'
-            || shell->command_shell[1][0] > '9')
-            && (my_strlen(shell->command_shell[1]) == 1)) {
-            my_printf("exit: Expression Syntax.\n");
+        if (option_error_exit(shell, i) == 1)
             return (1);
-        }
-        if ((shell->command_shell[1][i] < '0'
-            || shell->command_shell[1][i] > '9')
-            && shell->command_shell[1][0] == '-') {
-            my_printf("exit: Badly formed number.\n");
-            return (1);
-        }
-        if ((shell->command_shell[1][i] < '0'
-            || shell->command_shell[1][i] > '9')
-            && shell->command_shell[1][0] != '-') {
-            my_printf("exit: Expression Syntax.\n");
-            return (1);
-        }
     }
     return (0);
 }

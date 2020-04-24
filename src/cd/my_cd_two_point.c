@@ -19,16 +19,23 @@ void cd_with_point(shell_t *shell, int loc_pwd, char *new_pwd, char *stock)
     chdir(new_pwd);
 }
 
+int cd_dash_option(shell_t *shell, int loc_pwd, int a)
+{
+    if (a == 0) {
+        my_printf(": No such file or directory.\n");
+        return (1);
+    } else if (cd_dash(shell, loc_pwd) == FAILURE)
+        return (FAILURE);
+    return (0);
+}
+
 int cd_two_command(shell_t *shell, int loc_pwd, int loc_oldpwd, int a)
 {
     int error = 0;
 
     if (shell->command_shell[1][0] == '-'
                                         && shell->command_shell[1][1] == '\0') {
-        if (a == 0) {
-            my_printf(": No such file or directory.\n");
-            return (1);
-        } else if (cd_dash(shell, loc_pwd) == FAILURE)
+        if (cd_dash_option(shell, loc_pwd, a) == FAILURE)
             return (FAILURE);
     } else if (shell->command_shell[1][0] == '/'
                                         && shell->command_shell[1][1] == '\0') {
