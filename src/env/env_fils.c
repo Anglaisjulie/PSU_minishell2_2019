@@ -13,7 +13,7 @@ int pid_fils_action(shell_t *shell, int error)
 {
     for (int i = 0; shell->path_env[i] != NULL; i++)
         error = my_path(shell, i, error);
-    if (error == -1) {
+    if (error == -1 || error == 2) {
         my_printf("%s: Command not found.\n", shell->command_shell[0]);
         return (1);
     }
@@ -74,7 +74,6 @@ int option_exe(shell_t *shell, int error)
 int my_path(shell_t *shell, int i, int error)
 {
     shell->exe = NULL;
-
     if (create_av(shell, i) == FAILURE)
         return (FAILURE);
     if (shell->command_shell[0][0] == '.'
@@ -82,7 +81,7 @@ int my_path(shell_t *shell, int i, int error)
         shell->check++;
         return (-1);
     } else if (shell->check > 0)
-        return (1);
+        return (2);
     error = option_exe(shell, error);
     return (error);
 }
