@@ -41,7 +41,9 @@ int all_fonctions(shell_t *shell)
 int create_av(shell_t *shell, int i)
 {
     int len = shell->nb_command_one;
+    int a = my_strlen(shell->path_env[i]);
 
+    add_command(shell, i, a);
     shell->av = malloc(sizeof(char *) * (len + 1));
     if (shell->av == NULL)
         return (FAILURE);
@@ -57,12 +59,12 @@ int option_exe(shell_t *shell, int error)
     if (shell->command_shell[0][0] == '.'
                                         && shell->command_shell[0][1] == '/') {
         shell->exe = shell->command_shell[0];
-        error = execve(shell->command_shell[0],
-                                    shell->command_shell, shell->env_shell);
+        shell->av[0] = shell->command_shell[0];
+        error = execve(shell->exe, shell->av, shell->env_shell);
     } else if (shell->command_shell[0][0] == '/') {
         shell->exe = shell->command_shell[0];
-        error = execve(shell->command_shell[0],
-                                    shell->command_shell, shell->env_shell);
+        shell->av[0] = shell->command_shell[0];
+        error = execve(shell->exe, shell->av, shell->env_shell);
     } else {
         shell->exe = shell->av[0];
         shell->av[0] = shell->command_shell[0];

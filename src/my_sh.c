@@ -59,15 +59,14 @@ int select_command(shell_t *shell, char *command, int check)
     int error = 0;
 
     if (my_strlen(command) != 1 && -1) {
+        my_path_env(shell, command);
         my_command_shell(shell, command);
         for (int i = 0; i != shell->number; i++)  {
             shell->check = 0;
             separator_shell(shell);
             error = option_shell(shell);
-            if (error == NO) {
-                my_path_env(shell);
+            if (error == NO)
                 error = all_fonctions(shell);
-            }
         }
         shell->number = 0;
         shell->index_command = 0;

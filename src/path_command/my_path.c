@@ -28,30 +28,30 @@ int detection_path_env(shell_t *shell)
     return (location);
 }
 
-int malloc_path(shell_t *shell)
+int malloc_path(shell_t *shell, char *command)
 {
     int location = detection_path_env(shell);
     int x = 0;
     int a = 0;
-    int command = my_strlen(shell->command_shell[0]);
+    int size_command = my_strlen(command);
 
     if (location == -1)
         return (-1);
     for (int i = 0; shell->env_shell[location][i] != '\0'; i++) {
         if (shell->env_shell[location][i] == ':') {
-            shell->path_env[x] = malloc(sizeof(char) * (a + command + 2));
-            shell->path_env[x][a + command + 1] = '\0';
+            shell->path_env[x] = malloc(sizeof(char) * (a + size_command + 2));
+            shell->path_env[x][a + size_command + 1] = '\0';
             a = 0;
             x++;
         } else
             a++;
     }
-    shell->path_env[x] = malloc(sizeof(char) * (a + command + 2));
-    shell->path_env[x][a + command + 1] = '\0';
+    shell->path_env[x] = malloc(sizeof(char) * (a + size_command + 2));
+    shell->path_env[x][a + size_command + 1] = '\0';
     return (location);
 }
 
-int my_path_env(shell_t *shell)
+int my_path_env(shell_t *shell, char *command)
 {
     int location = 0;
     int x = 0;
@@ -59,12 +59,11 @@ int my_path_env(shell_t *shell)
 
     if (shell->env_shell == NULL)
         return (-1);
-    location = malloc_path(shell);
+    location = malloc_path(shell, command);
     if (location == -1)
         return (-1);
     for (int i = 5; shell->env_shell[location][i] != '\0'; i++) {
         if (shell->env_shell[location][i] == ':') {
-            add_command(shell, x, a);
             a = 0;
             x++;
         } else {
