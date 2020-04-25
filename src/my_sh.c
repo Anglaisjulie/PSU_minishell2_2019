@@ -57,16 +57,15 @@ void add_value(int value, shell_t *shell, char *add, int i)
 int select_command(shell_t *shell, char *command, int check)
 {
     int error = 0;
+    int i = 0;
 
+    shell->tour = 0;
     if (my_strlen(command) != 1 && -1) {
         my_path_env(shell, command);
         my_command_shell(shell, command);
-        for (int i = 0; i != shell->number; i++)  {
+        for (; i != shell->number; i++)  {
             shell->check = 0;
-            separator_shell(shell);
-            error = option_shell(shell);
-            if (error == NO)
-                error = all_fonctions(shell);
+            error = separator_shell(shell);
         }
         shell->number = 0;
         shell->index_command = 0;
@@ -83,6 +82,7 @@ int my_sh(shell_t *shell)
     int check = 0;
 
     while (eof != -1) {
+        check_signals();
         //display_prompt();
         if (getline(&command, &size_command, stdin) == -1) {
             break;

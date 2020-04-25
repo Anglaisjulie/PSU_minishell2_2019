@@ -87,6 +87,9 @@ void count_command(shell_t *shell)
         if (shell->all_command[i][0] == ';') {
             shell->number++;
         }
+        if (shell->all_command[i][0] == '|') {
+            shell->number++;
+        }
     }
     shell->number++;
 }

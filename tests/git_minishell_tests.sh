@@ -172,17 +172,20 @@ execute "./lib" "0"
 printf "\n\033[1;33m=== MINISHELL SEMICOLON TESTS ===\033[0m\n\n"
 
 execute "ls ; ls ; ls ; ls ; ls ; ls ; ls" "0"
-#execute "ls;ls;ls;ls;ls;ls;ls" "0"
-#execute "ls;exit 34;ls" "0"
+execute "ls;ls;ls;ls;ls;ls;ls" "0"
+execute "ls;exit 34;ls" "0"
 
 ### PIPE TESTS ###
 
 #printf "\n\033[1;33m=== MINISHELL PIPE TESTS ===\033[0m\n\n"
 
-#execute "ls / | wc -l | cat -e" "0"
-#execute "ls / | cat -e | cat -e | cat -e | cat -e | cat -e" "0"
-#execute "ls / | cat -e | cat -e" "0"
-#execute "ls /|cat -e|cat -e" "0"
+execute "env | grep PWD" "0"
+execute "ls | wc" "0"
+execute "ls | cat -e" "0"
+execute "ls / | wc -l | cat -e" "0"
+execute "ls / | cat -e | cat -e | cat -e | cat -e | cat -e" "0"
+execute "ls / | cat -e | cat -e" "0"
+execute "ls /|cat -e|cat -e" "0"
 
 ### OTHER TESTS ###
 

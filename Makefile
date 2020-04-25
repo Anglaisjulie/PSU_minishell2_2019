@@ -32,7 +32,8 @@ FILE_LIST =		main.c 									 \
 				cd/my_cd_with_arg.c                      \
 				cd/my_cd_slash.c                         \
 				cd/my_cd_error.c                         \
-				semicolons/semicolon.c                   \
+				redirection/semicolon.c                  \
+				redirection/pipe.c        	             \
 				signals/signal.c        				 \
 
 SRC	= 	$(addprefix $(SRC_DIR), $(FILE_LIST))

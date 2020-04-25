@@ -7,6 +7,29 @@
 
 #include "fonctions.h"
 
+void handler(int num)
+{
+    switch (num)
+    {
+    case SIGINT:
+        my_putstr("\n");
+        display_prompt();
+        break;
+    case SIGSEGV:
+        my_printf("Error.\n");
+        exit(84);
+    case SIGPIPE:
+        my_printf("Error.\n");
+        exit(84);
+    }
+}
+
+void check_signals(void)
+{
+    signal(SIGINT, handler);
+    signal(SIGPIPE, handler);
+}
+
 int check_segfault(int status)
 {
     int error = 0;
@@ -23,6 +46,7 @@ int check_segfault(int status)
     }
     if (WCOREDUMP(status))
         my_printf(" (core dumped)");
-    (a == 1 ? my_putchar('\n') : 0);
+    if (a == 1)
+        my_putchar('\n');
     return (error);
 }

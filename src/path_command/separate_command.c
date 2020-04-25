@@ -7,13 +7,26 @@
 
 #include "fonctions.h"
 
+int separator_check(shell_t *shell)
+{
+    switch (shell->all_command[shell->index_command][0])
+    {
+    case ';':
+        shell->type_command = SEMICOLON;
+        return (1);
+    case '|':
+        shell->type_command = PIPE;
+        return (1);
+    }
+    return (0);
+}
+
 int option_separator(shell_t *shell)
 {
     if (shell->nb_command == shell->len_total) {
         return (1);
-    } else if (shell->all_command[shell->index_command][0] == ';') {
+    } else if (separator_check(shell) == 1)
         return (1);
-    }
     return (0);
 }
 
@@ -28,27 +41,11 @@ int size_command_exe(shell_t *shell)
     return (start);
 }
 
-void new_command(shell_t *shell, int start, int end)
-{
-    int count = 0;
-    int x = 0;
-
-    if (start != 0 && shell->nb_command == shell->len_total)
-        end += 1;
-    for (int i = start; i != end; i++) {
-        count++;
-        shell->command_shell[x] = shell->all_command[i];
-        x++;
-    }
-    shell->nb_command_one = count;
-    if (shell->all_command[shell->index_command][0] == ';')
-        shell->index_command++;
-}
-
 int malloc_one_command(shell_t *shell)
 {
     int a = 0;
     int start = 0;
+    int error = 0;
 
     start = size_command_exe(shell);
     shell->command_shell = malloc(sizeof(char *) * (shell->index_command + 1));
@@ -62,18 +59,35 @@ int malloc_one_command(shell_t *shell)
             return (FAILURE);
         shell->command_shell[i][a] = '\0';
     }
-    //if (shell->type_command == SEMICOLON)
+    if (shell->type_command == SEMICOLON)
+        error = exe_semicolon(shell, start, shell->index_command);
+    if (shell->type_command == PIPE && shell->tour == 0) {
         new_command(shell, start, shell->index_command);
-    return (0);
+        shell->command_one = shell->command_shell;
+        return (0);
+    }
+    if (shell->type_command == PIPE && shell->tour == 1) {
+        new_command(shell, start, shell->index_command);
+        shell->command_two = shell->command_shell;
+        error = exe_pipe(shell, start, shell->index_command);
+    }
+
+    return (error);
 }
 
 int separator_shell(shell_t *shell)
 {
+    int error = 0;
+
     if (shell->number == 1) {
         shell->command_shell = shell->all_command;
         shell->nb_command_one = shell->nb_command + 1;
-        return (0);
+        int error = 0;
+        error = option_shell(shell);
+        if (error == NO)
+            error = all_fonctions(shell);
+        return (error);
     }
-    malloc_one_command(shell);
-    return (0);
+    error = malloc_one_command(shell);
+    return (error);
 }
