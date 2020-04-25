@@ -13,8 +13,8 @@ void add_all_command(shell_t *shell, char *command)
     int a = 0;
 
     for (int j = next_spaces(command); command[j] != '\0'; j++) {
-        if (((command[j] == ' ' || command[j] == '\t' || command[j] == '\\'
-            || command[j] == '\n')
+        if (((command[j] == ' ' || command[j] == '\t'
+            || command[j] == '\\' || command[j] == '\n')
             && (command[j + 1] == ' ' || command[j + 1] == '\t'
             || command[j + 1] == '\n'))
             || command[j] == '\\') {

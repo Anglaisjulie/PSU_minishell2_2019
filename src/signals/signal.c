@@ -16,8 +16,7 @@ void handler(int num)
         display_prompt();
         break;
     case SIGSEGV:
-        my_printf("Error.\n");
-        exit(84);
+        exit(0);
     case SIGPIPE:
         my_printf("Error.\n");
         exit(84);
@@ -28,6 +27,7 @@ void check_signals(void)
 {
     signal(SIGINT, handler);
     signal(SIGPIPE, handler);
+    signal(SIGSEGV, handler);
 }
 
 int check_segfault(int status)
@@ -48,5 +48,7 @@ int check_segfault(int status)
         my_printf(" (core dumped)");
     if (a == 1)
         my_putchar('\n');
+    if (error == 139 || error == 136)
+        exit(error);
     return (error);
 }

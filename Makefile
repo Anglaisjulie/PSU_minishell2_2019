@@ -51,11 +51,11 @@ all:	$(NAME) clean
 
 $(NAME):	$(OBJ)
 			make -C ./lib/
-			@echo -e "\033[1;33m[COMPILING TETRIS...]\033[0;32m"
+			@echo -e "\033[1;33m[COMPILING MINISHELL...]\033[0;32m"
 			$(CC) $@ $^ $(CFLAGS)
 			$(RM) $(addprefix $(SRC_DIR), *.o)
 			$(RM) $(addprefix $(SRC_DIR), */*.o)
-			@echo -e "\033[1;32m[SUCCESSFULLY TETRIS COMPLETED]\033[0;37m"
+			@echo -e "\033[1;32m[SUCCESSFULLY MINISHELL COMPLETED]\033[0;37m"
 
 clean:
 	$(RM) $(OBJ)
@@ -65,6 +65,6 @@ fclean:		clean
 			@echo -e "\033[1;34m[CLEAN LIB OK]\033[0;30m"
 			$(RM) $(NAME)
 			$(RM) Makefile~
-			@echo -e "\033[1;34m[CLEAN TETRIS OK]\033[0;30m"
+			@echo -e "\033[1;34m[CLEAN MINISHELL OK]\033[0;30m"
 
 re: 	fclean all
