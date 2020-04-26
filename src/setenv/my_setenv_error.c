@@ -42,6 +42,30 @@ int check_first_char(shell_t *shell)
     return (0);
 }
 
+int check_directory_stack(shell_t *shell)
+{
+    int a = 0;
+
+    for (int i = 1; i != my_strlen(shell->command_shell[2]); i++) {
+        if ((shell->command_shell[2][0] == '=')
+            && (shell->command_shell[2][i] >= '0'
+            && shell->command_shell[2][i] <= '9') && a == 0) {
+            a += 2;
+        } else if ((shell->command_shell[2][0] == '=')
+            && (shell->command_shell[2][i] >= '0'
+            && shell->command_shell[2][i] <= '9')) {
+            if (a == 0)
+                a = 1;
+            a++;
+        }
+    }
+    if (a == my_strlen(shell->command_shell[2])) {
+        my_printf("Directory stack not that deep.\n");
+        return (1);
+    }
+    return (0);
+}
+
 int setenv_error(shell_t *shell)
 {
     int error = 0;
@@ -55,6 +79,8 @@ int setenv_error(shell_t *shell)
     if (check_first_char(shell) == 1)
         return (1);
     if (check_char(shell) == 1)
+        return (1);
+    if (check_directory_stack(shell) == 1)
         return (1);
     error = my_setenv(shell);
     return (error);

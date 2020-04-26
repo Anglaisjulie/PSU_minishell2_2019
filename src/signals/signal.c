@@ -15,9 +15,6 @@ void handler(int num)
         my_putstr("\n");
         display_prompt();
         break;
-    case SIGSEGV:
-        my_printf("Error.\n");
-        exit(99);
     case SIGPIPE:
         my_printf("Error.\n");
         exit(84);
@@ -28,7 +25,6 @@ void check_signals(void)
 {
     signal(SIGINT, handler);
     signal(SIGPIPE, handler);
-    signal(SIGSEGV, handler);
 }
 
 int check_segfault(int status)
