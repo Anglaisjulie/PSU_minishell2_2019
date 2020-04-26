@@ -40,3 +40,25 @@ int exe_semicolon(shell_t *shell, int start, int end)
     }
     return (error);
 }
+
+int option_redirect(shell_t *shell, int start, int error)
+{
+    if (shell->type_command == SEMICOLON) {
+        error = exe_semicolon(shell, start, shell->index_command);
+    }
+    if (shell->type_command == PIPE && shell->tour == 0) {
+        new_command(shell, start, shell->index_command);
+        shell->command_one = shell->command_shell;
+        return (0);
+    }
+    if (shell->type_command == PIPE && shell->tour == 1) {
+        if (shell->nb_command < 2) {
+            my_printf("Invalid null command.\n");
+            return (1);
+        }
+        new_command(shell, start, shell->index_command);
+        shell->command_two = shell->command_shell;
+        error = exe_pipe(shell, start, shell->index_command);
+    }
+    return (error);
+}

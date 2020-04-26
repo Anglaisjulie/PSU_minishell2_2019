@@ -148,5 +148,6 @@ void check_signals(void);
 void new_command(shell_t *, int, int);
 int exe_pipe(shell_t *shell, int start, int end);
 int exe_semicolon(shell_t *shell, int start, int end);
+int option_redirect(shell_t *shell, int start, int error);
 
 #endif
