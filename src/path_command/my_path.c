@@ -15,8 +15,12 @@ int detection_path_env(shell_t *shell)
     for (int i = 0; shell->env_shell[i] != NULL; i++)
         if (my_strncmp(shell->env_shell[i], "PATH=", 5) == 0)
             location = i;
-    if (location == -1)
-        return (84);
+    if (location == -1) {
+        shell->env_shell = shell->env_stock;
+        for (int i = 0; shell->env_shell[i] != NULL; i++)
+        if (my_strncmp(shell->env_shell[i], "PATH=", 5) == 0)
+            location = i;
+    }
     for (int i = 0; shell->env_shell[location][i] != '\0'; i++)
         if (shell->env_shell[location][i] == ':')
             n++;
@@ -28,12 +32,12 @@ int detection_path_env(shell_t *shell)
     return (location);
 }
 
-int malloc_path(shell_t *shell, char *command)
+int malloc_path(shell_t *shell)
 {
     int location = detection_path_env(shell);
     int x = 0;
     int a = 0;
-    int size_command = my_strlen(command);
+    int size_command = my_strlen(shell->command_shell[0]);
 
     if (location == -1)
         return (-1);
@@ -51,15 +55,16 @@ int malloc_path(shell_t *shell, char *command)
     return (location);
 }
 
-int my_path_env(shell_t *shell, char *command)
+int my_path_env(shell_t *shell)
 {
     int location = 0;
     int x = 0;
     int a = 0;
 
+    shell->env_shell = shell->env_stock;
     if (shell->env_shell == NULL)
         return (-1);
-    location = malloc_path(shell, command);
+    location = malloc_path(shell);
     if (location == -1)
         return (-1);
     for (int i = 5; shell->env_shell[location][i] != '\0'; i++) {
@@ -83,17 +88,13 @@ void add_command(shell_t *shell, int x, int a)
 
 void count_command(shell_t *shell)
 {
-    //printf("nbr: %d\n", shell->nb_command);
     for (int i = 0; i != shell->nb_command; i++) {
         if (shell->all_command[i][0] == ';') {
-            //printf("COMMA\n");
             shell->number++;
         }
         if (shell->all_command[i][0] == '|') {
-            //printf("SLASH\n");
             shell->number++;
         }
     }
     shell->number++;
-    //printf("number: %d\n", shell->number);
 }

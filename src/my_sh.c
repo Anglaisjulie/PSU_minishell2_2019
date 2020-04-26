@@ -61,7 +61,6 @@ int select_command(shell_t *shell, char *command, int check)
 
     shell->tour = 0;
     if (my_strlen(command) != 1 && -1) {
-        my_path_env(shell, command);
         my_command_shell(shell, command);
         for (; i != shell->number; i++)  {
             shell->check = 0;

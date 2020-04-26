@@ -34,7 +34,9 @@ int exe_semicolon(shell_t *shell, int start, int end)
     if (shell->command_shell[0] == NULL || shell->command_shell[0][0] == '\0')
         return (0);
     error = option_shell(shell);
-    if (error == NO)
+    if (error == NO) {
+        my_path_env(shell);
         error = all_fonctions(shell);
+    }
     return (error);
 }

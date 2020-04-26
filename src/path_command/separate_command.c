@@ -94,8 +94,10 @@ int separator_shell(shell_t *shell)
         shell->nb_command_one = shell->nb_command + 1;
         int error = 0;
         error = option_shell(shell);
-        if (error == NO)
+        if (error == NO) {
+            my_path_env(shell);
             error = all_fonctions(shell);
+        }
         return (error);
     }
     error = malloc_one_command(shell);

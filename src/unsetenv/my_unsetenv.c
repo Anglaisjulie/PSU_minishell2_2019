@@ -52,9 +52,9 @@ int malloc_stock_unsetenv(shell_t *shell, int deleted)
 
     for (; shell->env_shell[i] != NULL; i++);
     stock = malloc(sizeof(char *) * (i + 1));
-    stock[i] = NULL;
     if (stock == NULL)
         return (-1);
+    stock[i] = NULL;
     for (int j = 0; shell->env_shell[j] != NULL; j++) {
         len = my_strlen(shell->env_shell[j]);
         stock[j] = malloc(sizeof(char) * (len + 1));
@@ -67,24 +67,32 @@ int malloc_stock_unsetenv(shell_t *shell, int deleted)
     return (0);
 }
 
-int my_unsetenv_option(shell_t *shell, int len, int i)
+int my_unsetenv_option(shell_t *shell, int i)
 {
-    if (my_strncmp(shell->command_shell[1], shell->env_shell[i], len) == 0)
+    int len = 0;
+
+    for (; shell->env_shell[i][len] != '='; len++);
+    if (my_strncmp(shell->command_shell[1], shell->env_shell[i], len) == 0) {
         if (malloc_stock_unsetenv(shell, i) == 84)
             return (-1);
+        return (2);
+    }
     return (0);
 }
 
 int my_unsetenv(shell_t *shell)
 {
-    int i = 0;
-    int len = my_strlen(shell->command_shell[1]);
+    int error = 0;
 
     for (int a = 0; shell->command_shell[1][a] != '\0'; a++)
         if (shell->command_shell[1][a] == '=')
             return (-1);
-    for (; shell->env_shell[i] != NULL; i++)
-        if (my_unsetenv_option(shell, len, i) == -1)
+    for (int i = 0; shell->env_shell[i] != NULL; i++) {
+        error = my_unsetenv_option(shell, i);
+        if (error == -1)
             return (-1);
+        else if (error == 2)
+            break;
+    }
     return (0);
 }

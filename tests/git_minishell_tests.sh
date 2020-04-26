@@ -147,9 +147,6 @@ execute "unsetenv PATH ; ls" "0"
 execute "unsetenv MYBG ; ls" "0"
 execute "unsetenv LVL ; ls" "0"
 
-
-
-
 ### EXIT TESTS ###
 
 printf "\n\033[1;33m=== MINISHELL EXIT TESTS ===\033[0m\n\n"

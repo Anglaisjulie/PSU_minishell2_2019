@@ -80,8 +80,9 @@ int setenv_error(shell_t *shell)
         return (1);
     if (check_char(shell) == 1)
         return (1);
-    if (check_directory_stack(shell) == 1)
-        return (1);
+    if (shell->nb_command_one == 3)
+        if (check_directory_stack(shell) == 1)
+            return (1);
     error = my_setenv(shell);
     return (error);
 }

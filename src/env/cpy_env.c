@@ -15,6 +15,7 @@ int my_cpy_env(shell_t *shell, char **env)
         for (int j = 0; env[i][j] != '\0'; j++)
             shell->env_shell[i][j] = env[i][j];
     }
+    shell->env_stock = shell->env_shell;
     return (0);
 }
 

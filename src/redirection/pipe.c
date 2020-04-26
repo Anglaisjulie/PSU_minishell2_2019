@@ -16,8 +16,10 @@ int command_first(shell_t *shell, int *pipefd)
     dup2(pipefd[1], STDOUT_FILENO);
     close(pipefd[1]);
     error = option_shell(shell);
-    if (error == NO)
+    if (error == NO) {
+        my_path_env(shell);
         error = all_fonctions(shell);
+    }
     return (error);
 }
 
@@ -30,8 +32,10 @@ int command_second(shell_t *shell, int *pipefd)
     dup2(pipefd[0], STDIN_FILENO);
     close(pipefd[0]);
     error = option_shell(shell);
-    if (error == NO)
+    if (error == NO) {
+        my_path_env(shell);
         error = all_fonctions(shell);
+    }
     return (error);
 }
 
