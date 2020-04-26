@@ -77,6 +77,7 @@ int detection_path_env(shell_t *);
 int my_path(shell_t *, int, int);
 int next_spaces(char *);
 void add_all_command(shell_t *, char *);
+int location_of_path(shell_t *shell, int location);
 ////////////////////////////////////////////////////////////////////////////////
 //SETENV////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
@@ -149,5 +150,6 @@ void new_command(shell_t *, int, int);
 int exe_pipe(shell_t *shell, int start, int end);
 int exe_semicolon(shell_t *shell, int start, int end);
 int option_redirect(shell_t *shell, int start, int error);
+int error_pipe(shell_t *shell);
 
 #endif

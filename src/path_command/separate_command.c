@@ -68,11 +68,8 @@ int separator_shell(shell_t *shell)
     int error = 0;
 
     if (shell->number == 1) {
-        for (int i = 0; i != shell->nb_command + 1; i++)
-            if ((shell->all_command[i][0] == '|')) {
-                my_printf("Invalid null command.\n");
-                return (1);
-            }
+        if (error_pipe(shell) == 1)
+            return (1);
         shell->command_shell = shell->all_command;
         shell->nb_command_one = shell->nb_command + 1;
         int error = 0;

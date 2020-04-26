@@ -12,14 +12,10 @@ int detection_path_env(shell_t *shell)
     int location = -1;
     int n = 0;
 
-    for (int i = 0; shell->env_shell[i] != NULL; i++)
-        if (my_strncmp(shell->env_shell[i], "PATH=", 5) == 0)
-            location = i;
+    location = location_of_path(shell, location);
     if (location == -1) {
         shell->env_shell = shell->env_stock;
-        for (int i = 0; shell->env_shell[i] != NULL; i++)
-        if (my_strncmp(shell->env_shell[i], "PATH=", 5) == 0)
-            location = i;
+        location = location_of_path(shell, location);
     }
     for (int i = 0; shell->env_shell[location][i] != '\0'; i++)
         if (shell->env_shell[location][i] == ':')

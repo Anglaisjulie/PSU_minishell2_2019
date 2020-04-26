@@ -62,3 +62,14 @@ int exe_pipe(shell_t *shell, int start, int end)
     close(pipefd[1]);
     return (error);
 }
+
+int error_pipe(shell_t *shell)
+{
+    for (int i = 0; i != shell->nb_command + 1; i++) {
+        if ((shell->all_command[i][0] == '|')) {
+            my_printf("Invalid null command.\n");
+            return (1);
+        }
+    }
+    return (0);
+}

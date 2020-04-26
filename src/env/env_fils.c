@@ -27,10 +27,6 @@ int pid_fils_action(shell_t *shell, int error)
             my_printf("%s: Not a directory.", shell->command_shell[0]);
             return (1);
         }
-        if (errno == ENOTDIR) {
-            my_printf("%s: No such file or directory.", shell->command_shell[0]);
-            return (1);
-        }
     }
     return (0);
 }

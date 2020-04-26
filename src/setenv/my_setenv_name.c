@@ -54,9 +54,8 @@ int malloc_env_know_name(shell_t *shell, char **stock, int modified)
     int max = 0;
     int z = 0;
 
-    for (int k = 0; shell->env_shell[k] != NULL; k++) {
+    for (int k = 0; shell->env_shell[k] != NULL; k++)
         stock[k] = my_strcpy(stock[k], shell->env_shell[k]);
-    }
     for (; stock[i] != NULL; i++);
     shell->env_shell = malloc(sizeof(char *) * (i + 1));
     shell->env_shell[i] = NULL;

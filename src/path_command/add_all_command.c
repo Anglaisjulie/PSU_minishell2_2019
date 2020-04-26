@@ -7,11 +7,8 @@
 
 #include "fonctions.h"
 
-void add_all_command(shell_t *shell, char *command)
+void add_loop(shell_t *shell, char *command, int a, int i)
 {
-    int i = 0;
-    int a = 0;
-
     for (int j = next_spaces(command); command[j] != '\0'; j++) {
         if (((command[j] == ' ' || command[j] == '\t'
             || command[j] == '\\' || command[j] == '\n')
@@ -30,6 +27,25 @@ void add_all_command(shell_t *shell, char *command)
             a++;
         }
     }
+}
+
+void add_all_command(shell_t *shell, char *command)
+{
+    int i = 0;
+    int a = 0;
+
+    add_loop(shell, command, a, i);
     if (shell->all_command[0][0] == '|')
         shell->nb_command--;
+}
+
+int location_of_path(shell_t *shell, int location)
+{
+    for (int i = 0; shell->env_shell[i] != NULL; i++) {
+        if (my_strncmp(shell->env_shell[i], "PATH=", 5) == 0) {
+            location = i;
+            break;
+        }
+    }
+    return (location);
 }
