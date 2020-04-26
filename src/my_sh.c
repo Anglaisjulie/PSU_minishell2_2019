@@ -82,7 +82,7 @@ int my_sh(shell_t *shell)
 
     while (eof != -1) {
         check_signals();
-        display_prompt();
+        //display_prompt();
         if (getline(&command, &size_command, stdin) == -1) {
             break;
         }
