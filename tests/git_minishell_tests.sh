@@ -117,8 +117,29 @@ execute "setenv to_to ; unsetenv to_to" "0"
 execute "setenv PWD = ; unsetenv PWD" "0"
 execute "unsetenv PWD ; setenv OTHER a" "0"
 execute "unsetenv a ; setenv PWD a" "0"
-execute "unsetenv ZSH ; setenv OTHER" "0"
-
+execute "setenv LVL 4 ; env" "0"
+execute "setenv LVL = 4 ; env" "0"
+execute "setenv LVL= 4 ; env" "0"
+execute "setenv LVL =4 ; env" "0"
+execute "setenv LVL=4 ; env" "0"
+execute "setenv MYBG 4; env" "0"
+execute "setenv MYBG = 4 ; env" "0"
+execute "setenv MYBG= 4 ; env" "0"
+execute "setenv MYBG =4 ; env" "0"
+execute "setenv MYBG=4 ; env" "0"
+execute "setenv PATH /bin/usr/bin ; env" "0"
+execute "setenv PATH = /bin/usr/bin ; env" "0"
+execute "setenv PATH= /bin/usr/bin ; env" "0"
+execute "setenv PATH =/bin/usr/bin ; env" "0"
+execute "setenv PATH=/bin/usr/bin ; env" "0"
+execute "setenv LS=Color 12; env" "0"
+execute "setenv LS=Color = 12; env" "0"
+execute "setenv LS=Color =12; env" "0"
+execute "setenv LS= Color=12; env" "0"
+execute "setenv LS =Color=12; env" "0"
+execute "setenv LS Color 12; env" "0"
+execute "setenv LS=Color=12; env" "0"
+execute "setenv LS = Color = 12; env" "0"
 
 ### EXIT TESTS ###
 
@@ -145,7 +166,7 @@ execute "exit -" "0"
 
 printf "\n\033[1;33m=== MINISHELL WITHOUT PATH TESTS ===\033[0m\n\n"
 
-execute "unsetenv PATH ; /bin/ls /" "1"
+#execute "unsetenv PATH ; /bin/ls /" "1"
 
 ### ERROR HANDLING TESTS ###
 
@@ -163,14 +184,14 @@ printf "\n\033[1;33m=== MINISHELL PERMISSIONS AND EXECUTION TESTS ===\033[0m\n\n
 execute "mysh" "0"
 execute "/bin" "0"
 execute "usr/bin" "0"
-execute "/bin -> usr/bin" "0"
+#execute "/bin -> usr/bin" "0"
 execute "../bin/ls" "0"
 execute "./bin/ls" "0"
 execute "/bin/ls" "0"
 execute "/bin/ls/" "0"
 execute "./lib" "0"
-execute "ls -F /sbin" "0"
-execute "ls -F /sbin | grep '@'" "0"
+#execute "ls -F /sbin" "0"
+#execute "ls -F /sbin | grep '@'" "0"
 
 ### SEMICOLON TESTS ###
 
@@ -182,8 +203,8 @@ execute "; ls" "0"
 execute "   ; ls" "0"
 execute "ls ;    ; ls -l" "0"
 execute "ls ; ls ; ls ; ls ; ls ; ls ; ls" "0"
-execute "ls;ls;ls;ls;ls;ls;ls" "0"
-execute "ls;exit 34;ls" "0"
+#execute "ls;ls;ls;ls;ls;ls;ls" "0"
+#execute "ls;exit 34;ls" "0"
 
 ### PIPE TESTS ###
 
@@ -196,10 +217,10 @@ execute "| ls" "0"
 execute "   | ls" "0"
 execute "ls | wc" "0"
 execute "ls | cat -e" "0"
-execute "ls / | wc -l | cat -e" "0"
-execute "ls / | cat -e | cat -e | cat -e | cat -e | cat -e" "0"
-execute "ls / | cat -e | cat -e" "0"
-execute "ls /|cat -e|cat -e" "0"
+#execute "ls / | wc -l | cat -e" "0"
+#execute "ls / | cat -e | cat -e | cat -e | cat -e | cat -e" "0"
+#execute "ls / | cat -e | cat -e" "0"
+#execute "ls /|cat -e|cat -e" "0"
 
 ### OTHER TESTS ###
 
