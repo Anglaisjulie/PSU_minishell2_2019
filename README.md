@@ -41,6 +41,8 @@ Here is a simple example of a command you must hanlde:
 
 ## Use of functional tests
 
+Do not display the prompt for tests.
+
 ```
 ∼/PSU_minishell2_2019> make
 ∼/PSU_minishell2_2019> ./tests/git_minishell_tests.sh
