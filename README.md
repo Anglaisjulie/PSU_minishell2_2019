@@ -14,7 +14,7 @@ The goal of the project is to enrich your minishell1 project by adding semicolon
 Here is a simple example of a command you must hanlde:
 
 ```
-∼/B-PSU-210> ./mysh
+∼/PSU_minishell2_2019> ./mysh
 > mkdir test ; cd test ; ls -a ; ls | cat | wc -c > tutu ; cat tutu
 ...
 5
@@ -33,13 +33,14 @@ Here is a simple example of a command you must hanlde:
 
 ## compile & execute
 
-```sh
-    make
-    ./mysh
 ```
+∼/PSU_minishell2_2019> make
+∼/PSU_minishell2_2019> ./mysh
+```
+
 ## Use of functional tests
 
-```sh
-    make
-    ./tests/git_minishell_tests.sh
+```
+∼/PSU_minishell2_2019> make
+∼/PSU_minishell2_2019> ./tests/git_minishell_tests.sh
 ```
