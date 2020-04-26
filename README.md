@@ -1,6 +1,6 @@
 # MINISHELL 2
 
-Simple reproduction of the tcsh shell.
+Simple reproduction of the tcsh shell (PART 2).
 
 - **Binary name:** mysh
 - **Repository name:** PSU_minishell2_2019
@@ -31,11 +31,12 @@ Here is a simple example of a command you must hanlde:
 - wait3, wait4, signal, kill, getpid, strerror, perror, strsignal
 - pipe, dup, dup2
 
-## compile & execute
+## Compile & Execute
 
 ```
 ∼/PSU_minishell2_2019> make
 ∼/PSU_minishell2_2019> ./mysh
+>
 ```
 
 ## Use of functional tests

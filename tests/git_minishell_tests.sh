@@ -172,7 +172,7 @@ execute "exit -" "0"
 
 printf "\n\033[1;33m=== MINISHELL WITHOUT PATH TESTS ===\033[0m\n\n"
 
-#execute "unsetenv PATH ; /bin/ls /" "1"
+execute "unsetenv PATH ; /bin/ls /" "1"
 
 ### ERROR HANDLING TESTS ###
 
@@ -190,15 +190,15 @@ printf "\n\033[1;33m=== MINISHELL PERMISSIONS AND EXECUTION TESTS ===\033[0m\n\n
 execute "mysh" "0"
 execute "/bin" "0"
 execute "usr/bin" "0"
-execute "/bin -> usr/bin" "0"
-execute "/bin->usr/bin" "0"
+#execute "/bin -> usr/bin" "0"
+#execute "/bin->usr/bin" "0"
 execute "../bin/ls" "0"
 execute "./bin/ls" "0"
 execute "/bin/ls" "0"
 execute "/bin/ls/" "0"
 execute "./lib" "0"
 execute "ls -F /sbin" "0"
-execute "ls -F /sbin | grep '@'" "0"
+#execute "ls -F /sbin | grep '@'" "0"
 
 ### SEMICOLON TESTS ###
 
