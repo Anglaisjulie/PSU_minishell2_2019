@@ -140,6 +140,14 @@ execute "setenv LS =Color=12 ; ls" "0"
 execute "setenv LS Color 12 ; ls" "0"
 execute "setenv LS=Color=12 ; ls" "0"
 execute "setenv LS = Color = 12 ; ls" "0"
+execute "setenv LS =12 ; ls" "0"
+execute "unsetenv LS; ls" "0"
+execute "unsetenv PATH ; ls" "0"
+execute "unsetenv MYBG ; ls" "0"
+execute "unsetenv LVL ; ls" "0"
+
+
+
 
 ### EXIT TESTS ###
 
