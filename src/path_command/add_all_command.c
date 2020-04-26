@@ -24,7 +24,12 @@ void add_all_command(shell_t *shell, char *command)
             i++;
         } else {
             shell->all_command[i][a] = command[j];
+            if (shell->all_command[i][0] == ';'
+                                        && shell->all_command[i + 1] == NULL)
+                shell->nb_command--;
             a++;
         }
     }
+    if (shell->all_command[0][0] == '|')
+        shell->nb_command--;
 }

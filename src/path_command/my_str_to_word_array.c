@@ -9,16 +9,19 @@
 
 int nb_word(shell_t *shell, char *command)
 {
-    int len = 0;
+    int len = -1;
 
     for (int k = 0; command[k] != '\0'; k++) {
-        if (((command[k] == ' ' || command[k] == '\t' || command[k] == '\\')
-            && ((command[k + 1] == ' ') || (command[k + 1] == '\t')))
-            || (command[k + 1] == '\n')) {
-        } else if ((command[k] == ' ' || command[k] == '\t')) {
+        if ((command[k] == ' ' || command[k] == '\t' || command[k] == '\\'
+            || command[k] == '\n')) {
+        } else if ((command[k] != ' ' || command[k] != '\t'
+            || command[k] != '\\' || command[k] != '\n')
+            && (command[k + 1] == ' ' || command[k + 1] == '\t'
+            || command[k + 1] == '\n'))
             len++;
-        }
     }
+    if (len == -1)
+        return (FAILURE);
     shell->all_command = malloc(sizeof(char *) * (len + 1));
     if (shell->all_command == NULL)
         return (84);

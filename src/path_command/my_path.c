@@ -83,13 +83,17 @@ void add_command(shell_t *shell, int x, int a)
 
 void count_command(shell_t *shell)
 {
+    //printf("nbr: %d\n", shell->nb_command);
     for (int i = 0; i != shell->nb_command; i++) {
         if (shell->all_command[i][0] == ';') {
+            //printf("COMMA\n");
             shell->number++;
         }
         if (shell->all_command[i][0] == '|') {
+            //printf("SLASH\n");
             shell->number++;
         }
     }
     shell->number++;
+    //printf("number: %d\n", shell->number);
 }

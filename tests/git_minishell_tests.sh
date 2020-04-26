@@ -38,7 +38,6 @@ execute ()
         TCSH=$(echo "$1" | tcsh 2>&1)
     fi
     RET_TCSH=$(echo $?)
-
     compare "$MYSH" "$TCSH" "$RET_MYSH" "$RET_TCSH" "$1"
 }
 
@@ -54,7 +53,7 @@ execute "ls -l" "0"
 execute "exit" "0"
 execute "cd ; pwd" "0"
 execute "cat toto" "0"
-execute "exitt" "0"
+execute "exit" "0"
 
 ### SPACES AND TABS TESTS ###
 
@@ -63,11 +62,8 @@ printf "\n\033[1;33m=== MINISHELL SPACES AND TABS TESTS ===\033[0m\n\n"
 #only spaces
 execute "    " "0"
 execute "     ls             -l      -all     " "0"
-
 #only tabs
 execute "\tls\t-l\t-all\t" "0"
-execute "\nls\t-l\n-all\t" "0"
-
 #tabs and spaces
 execute "\tls      \t   -l  \t-all      \t   " "0"
 
@@ -82,6 +78,7 @@ execute "cd lib ; pwd" "0"
 execute "cd lib ; cd - ; pwd" "0"
 execute "cd toto tata" "0"
 execute "cd fail_dir" "0"
+execute "unsetenv PWD ; cd" "1"
 execute "unsetenv HOME ; cd" "1"
 execute "unsetenv OLDPWD ; cd -" "1"
 
@@ -122,6 +119,7 @@ execute "unsetenv PWD ; setenv OTHER a" "0"
 execute "unsetenv a ; setenv PWD a" "0"
 execute "unsetenv ZSH ; setenv OTHER" "0"
 
+
 ### EXIT TESTS ###
 
 printf "\n\033[1;33m=== MINISHELL EXIT TESTS ===\033[0m\n\n"
@@ -141,6 +139,7 @@ execute "exit 12 ; ls" "0"
 execute "exit 12 ; exit 123" "0"
 execute "exit 12 ; exit -a123" "0"
 execute "exit -" "0"
+
 
 ### WITHOUT PATH TESTS ###
 
@@ -162,24 +161,39 @@ execute "./tests/seg_core_dump2" "0"
 printf "\n\033[1;33m=== MINISHELL PERMISSIONS AND EXECUTION TESTS ===\033[0m\n\n"
 
 execute "mysh" "0"
-execute "../bin/ls" "1"
+execute "/bin" "0"
+execute "usr/bin" "0"
+execute "/bin -> usr/bin" "0"
+execute "../bin/ls" "0"
 execute "./bin/ls" "0"
 execute "/bin/ls" "0"
+execute "/bin/ls/" "0"
 execute "./lib" "0"
+execute "ls -F /sbin" "0"
+execute "ls -F /sbin | grep '@'" "0"
 
 ### SEMICOLON TESTS ###
 
 printf "\n\033[1;33m=== MINISHELL SEMICOLON TESTS ===\033[0m\n\n"
 
+execute "ls ;   " "0"
+execute "ls ;" "0"
+execute "; ls" "0"
+execute "   ; ls" "0"
+execute "ls ;    ; ls -l" "0"
 execute "ls ; ls ; ls ; ls ; ls ; ls ; ls" "0"
 execute "ls;ls;ls;ls;ls;ls;ls" "0"
 execute "ls;exit 34;ls" "0"
 
 ### PIPE TESTS ###
 
-#printf "\n\033[1;33m=== MINISHELL PIPE TESTS ===\033[0m\n\n"
+printf "\n\033[1;33m=== MINISHELL PIPE TESTS ===\033[0m\n\n"
 
 execute "env | grep PWD" "0"
+execute "ls |" "0"
+execute "ls |    " "0"
+execute "| ls" "0"
+execute "   | ls" "0"
 execute "ls | wc" "0"
 execute "ls | cat -e" "0"
 execute "ls / | wc -l | cat -e" "0"
@@ -202,8 +216,4 @@ printf "\n\033[1;34m=== MINISHELL RESULT TESTS ===\033[0m\n"
 printf "\n\033[1;34mSuccess: %d/%d\n\033[0m" $SUCCESS_TESTS $TOTAL_TESTS
 printf "\033[1;34mFailed: %d/%d\033[0m\n\n" $((TOTAL_TESTS-SUCCESS_TESTS)) $TOTAL_TESTS
 
-if [ "$((TOTAL_TESTS-SUCCESS_TESTS))" = "0" ]; then
-    printf "\033[1;32m---------SUCCESS---------\n\n\033[0m"
-else
-    printf "\033[1;31m---------FAILURE---------\n\n\033[0m"
-fi
+printf "\033[1;36m=== MINISHELL FUNCTIONAL TESTS ===\033[0m\n\n"

@@ -31,6 +31,8 @@ int exe_semicolon(shell_t *shell, int start, int end)
     int error = 0;
 
     new_command(shell, start, end);
+    if (shell->command_shell[0] == NULL || shell->command_shell[0][0] == '\0')
+        return (0);
     error = option_shell(shell);
     if (error == NO)
         error = all_fonctions(shell);
