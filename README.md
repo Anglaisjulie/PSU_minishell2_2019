@@ -1,5 +1,7 @@
 # MINISHELL 2
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b26ccab78bb346d4b61886cffcdc0459)](https://app.codacy.com/manual/Anglaisjulie/PSU_minishell2_2019?utm_source=github.com&utm_medium=referral&utm_content=Anglaisjulie/PSU_minishell2_2019&utm_campaign=Badge_Grade_Dashboard)
+
 Simple reproduction of the tcsh shell (PART 2).
 
 - **Binary name:** mysh
